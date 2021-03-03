@@ -1,5 +1,11 @@
 # pokedex
 
+Nesse projeto utilizo as tecnologias: Vue.js, JavaScipt, CSS e HTML.
+Faço uso da API: pokeapi.
+
+https://pokedexvuejs.netlify.app/
+
+
 ## Project setup
 ```
 npm install
