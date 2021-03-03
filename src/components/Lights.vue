@@ -1,6 +1,6 @@
 <template>
   <section class="lights">
-    <span v-for="(button, index) in buttons" :key="index" v-bind="button"></span>
+    <span v-for="(light, index) in lights" :key="index" v-bind="light"></span>
   </section>
 </template>
 
@@ -10,11 +10,11 @@ export default {
   name: 'Lights',
   data() {
     return {
-      buttons: [
-        {style: {backgroundImage: 'linear-gradient(#fff, #006BFE)'}, class:'firstLight'},
-        {style: {backgroundImage: 'linear-gradient(#fff, #FF0000)'}, class:'secondLight'},
-        {style: {backgroundImage: 'linear-gradient(#fff, #F7FF2B)'}, class:'thirdLight'},
-        {style: {backgroundImage: 'linear-gradient(#fff, #50FF1D)'}, class:'forthLight'},
+      lights: [
+        {style: {background: 'linear-gradient(#fff, #006BFE)'}, class:'firstLight'},
+        {style: {background: 'linear-gradient(#fff, #FF0000)'}, class:'secondLight'},
+        {style: {background: 'linear-gradient(#fff, #F7FF2B)'}, class:'thirdLight'},
+        {style: {background: 'linear-gradient(#fff, #50FF1D)'}, class:'forthLight'}
       ]
     }
   }

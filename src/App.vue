@@ -1,6 +1,9 @@
 <template>
   <div id="app">
     <Header/>
+      <transition mode="out-in">
+        <router-view />
+      </transition>
   </div>
 </template>
 
@@ -20,7 +23,7 @@ export default {
   box-sizing: border-box;
 }
 
-body, ul, li, h1, h2, p {
+body, ul, li, h1, h2, p, a, button {
   margin: 0px;
   padding: 0px;
 }
@@ -53,6 +56,11 @@ input {
 img {
   max-width: 100%;
   display: block;
+}
+
+button {
+  border: none;
+  outline: none;
 }
 
 :root {
@@ -95,5 +103,27 @@ img {
   --type-water:#8FD1FE;
 
   --number-pokemon: #22222283;
+
+  --font-default: 'IBM Plex Sans', sans-serif;
+  --font-secondary: Arial, Helvetica, sans-serif;
+}
+
+
+.v-enter,
+.v-leave-to {
+  opacity: 0;
+}
+
+.v-enter {
+  transform: translate3d(0, -20px, 0);
+}
+
+.v-leave-to {
+  transform: translate3d(0, 20px, 0);
+}
+
+.v-enter-active,
+.v-leave-active {
+  transition: all 0.5s;
 }
 </style>

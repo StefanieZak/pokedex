@@ -2,7 +2,7 @@
   <section class="header-wrapper">
     <header class="header">
       <Lights/>
-      <h1>Pokedex</h1>
+      <router-link :to="{name: 'Home'}"><h1>Pokedex</h1></router-link>
     </header>
       <div class="search-wrapper">
         <input type="text" id="search" name="search" placeholder="Search...">
