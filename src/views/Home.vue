@@ -3,19 +3,19 @@
   <section class="home-wrapper">
     <div class="btn-wrapper">
     <router-link :to="{name: 'allpokemons'}">
-      All Pokemon
+      All Pokemons
       <img class="all-btn" src="@/assets/all-btn.png">
     </router-link>
     </div>
     <div class="btn-wrapper">
     <router-link :to="{name: 'generations'}">
-      Generation
+      Generations
       <img class="generation-btn" src="@/assets/generation-btn.jpg">
     </router-link>
     </div>
     <div class="btn-wrapper">
     <router-link :to="{name: 'types'}">
-      Type
+      Types
       <img class="types-btn" src="@/assets/types-btn.jpg">
     </router-link>
     </div>
@@ -30,7 +30,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .home-wrapper {
   display: flex;
   flex-direction: column;
@@ -116,6 +116,7 @@ export default {
 @media  screen and (max-width: 500px) { 
   .btn-wrapper a {
   min-width: 280px;
+  padding-left: 15px;
   }
   .generation-btn {
     height: 75%;

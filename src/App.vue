@@ -38,10 +38,19 @@ body {
 }
 
 h1 {
-  font-family: 'IBM Plex Sans', sans-serif;
+  font-family: var(--font-default);
   font-size: 2.625rem;
   font-weight: bold;
   color: #fff;
+}
+
+h2 {
+  font-family: var(--font-secondary);
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #BFBFC0;
+  margin: 35px 0 50px 0;
 }
 
 a {
@@ -70,7 +79,7 @@ button {
   --bg-eletric:#FFD86F;
   --bg-fairy:#EC2674;
   --bg-fighting:#F0623A;
-  --bg-fire:#FB6C6C;
+  --bg-fire:##FB926C;
   --bg-flying:#9FB9CB;
   --bg-ghost:#906791;
   --bg-grass:#48D0B0;
@@ -89,7 +98,7 @@ button {
   --type-eletric:#FAE8A2;
   --type-fairy:#EF71A3;
   --type-fighting:#FE8C6B;
-  --type-fire:#F88C8B;
+  --type-fire:##FDB69C;
   --type-flying:#B7CEDD;
   --type-ghost:#B282B4;
   --type-grass:#60DFC8;
@@ -108,6 +117,14 @@ button {
   --font-secondary: Arial, Helvetica, sans-serif;
 }
 
+.container {
+  display: flex;
+  margin: 25px auto;
+  width: 80%;
+  min-height: 100vh;
+  background: #fff;
+  border-radius: 10px;
+}
 
 .v-enter,
 .v-leave-to {

@@ -99,8 +99,13 @@ input::placeholder {
      margin-left: 25px;
    }
 
+  input {
+    position: absolute;
+    top: 55px;
+  }
+
   .search-wrapper img {
-    top: 70px;
+    top: 60px;
     left: 88vw;
   }
 }
