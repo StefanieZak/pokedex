@@ -1,15 +1,13 @@
 <template>
   <section class="header-wrapper">
     <header class="header">
-        <div class="input-wrapper">
-          <Lights/>
-          <div class="search-wrapper">
-            <input type="text" id="search" name="search" placeholder="Search...">
-            <img src="@/assets/lupa.svg">
-          </div>
-        </div>
+      <Lights/>
       <h1>Pokedex</h1>
     </header>
+      <div class="search-wrapper">
+        <input type="text" id="search" name="search" placeholder="Search...">
+        <img src="@/assets/lupa.svg">
+      </div>
   </section>
 </template>
 
@@ -32,22 +30,24 @@ export default {
 .header {
   display: flex;
   justify-content: space-between;
+  position: relative;
   width: 100%;
   height: 115px;
   background-color: #FF3F3F;
   clip-path: polygon(0 0, 100% 0, 100% 70%, 62% 70%, 50% 100%, 0 100%);
-  z-index: 1;
 }
 
-.header input {
+input {
+  position: absolute;
+  top: 70px;
   width: 400px;
-  margin-left: 115px;
+  left: 115px;
   padding: 8px 10px;
   background-color: #F9D2D2;
   border-radius: 10px;
 }
 
-.header input:focus {
+input:focus {
   background-color: #fff;
   border: 2px solid #a80c0c;
 }
@@ -56,18 +56,52 @@ input::placeholder {
   font-size: 1rem;
 }
 
-.search-wrapper {
-  position: relative;
-}
-
 .search-wrapper img {
   position: absolute;
-  top: calc(50% - 12.5px);
-  right: 10px;
+  top: 75px;
+  left: 480px;
 }
 
 .header h1 {
   margin-top: 10px;
   margin-right: 50px;
+}
+
+@media screen and (max-width: 1024px) {
+  .header {
+  height: 80px;
+}
+
+  input {
+    position: absolute;
+    top: 65px;
+    width: 36vw;
+    left: 62vw;
+  }
+
+  .search-wrapper img {
+    top: 70px;
+    left: 92vw;
+  }
+
+  .header h1 {
+    font-size: 1.7rem;
+  }
+}
+
+ @media screen and (max-width: 420px) {
+  .header {
+    height: 70px;
+  }
+
+  .header h1 {
+     font-size: 1.5rem;
+     margin-left: 25px;
+   }
+
+  .search-wrapper img {
+    top: 70px;
+    left: 88vw;
+  }
 }
 </style>
