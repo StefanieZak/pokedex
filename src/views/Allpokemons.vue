@@ -1,7 +1,7 @@
 <template>
   <section class="container">
     <h2>All Pokemons</h2>
-    <div v-if="pokemons">
+    <div class="card-wrapper" v-if="pokemons">
       <div v-for="(pokemon, index) in pokemons" :key="index">
         <CardPokemon :pokemon="pokemon"/>  
       </div>  
@@ -35,5 +35,9 @@ export default {
 </script>
 
 <style scoped>
-
+.card-wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 </style>
