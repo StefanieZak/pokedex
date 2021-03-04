@@ -55,6 +55,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'Generations',
 }
@@ -97,15 +98,40 @@ export default {
   transform: scale(1.05);
 }
 
-@media screen and (max-width: 340px) {
-  h2 {
-    margin: 35px 0 35px 0;
-    text-align: center;
-  }
+@media screen and (max-width: 780px) {
+.container {
+  padding-left:10px;
+  padding-right:10px;
+}
 
-  .container {
-    padding-left:0px;
-    padding-right:0px;
+.btn-generation a {
+  margin: 0 15px 25px 15px;
+  width: 160px;
+  height: 160px;
+  font-size: 1rem;
+  padding: 5px 0 10px 15px;
+}
+}
+
+@media screen and (max-width: 500px) {
+.container {
+  width: 90%;
+  padding-left:0px;
+  padding-right:0px;
+}
+
+ h2 {
+  margin: 35px 0 35px 0;
+  text-align: center;
+}
+
+.btn-generation a {
+  margin: 0 15px 25px 15px;
+  width: 130px;
+  height: 130px;
+  font-size: 1rem;
+  text-align: center;
+  padding: 0 0 10px 0;
 }
 }
 </style>
