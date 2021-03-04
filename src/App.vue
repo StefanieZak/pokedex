@@ -119,6 +119,9 @@ button {
 
 .container {
   display: flex;
+  flex-direction: column;
+  padding-left:60px;
+  padding-right:60px;
   margin: 25px auto;
   width: 80%;
   min-height: 100vh;

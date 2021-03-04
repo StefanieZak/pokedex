@@ -62,13 +62,6 @@ export default {
 </script>
 
 <style scoped>
-.container {
-  display: flex;
-  flex-direction: column;
-  padding-left:60px;
-  padding-right:60px;
-}
-
 .generations-wrapper {
   display: flex;
   flex-wrap: wrap;
