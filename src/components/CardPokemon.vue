@@ -2,7 +2,7 @@
     <div class="card" :class="typeCard" v-if="itemPokemon">
       <div class="number-wrapper">
         <h3>{{pokemon.name}}</h3>
-        <p>{{itemPokemon.id}}</p>
+        <p>{{itemPokemon.id | numeroPokemon}}</p>
       </div>
       <div class="img-wrapper">
         <p :class="bgType">{{itemPokemon.types[0].type.name}}</p>
