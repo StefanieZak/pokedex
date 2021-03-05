@@ -1,11 +1,11 @@
 <template>
-    <div class="card" v-if="itemPokemon">
+    <div class="card" :class="typeCard" v-if="itemPokemon">
       <div class="number-wrapper">
         <h3>{{pokemon.name}}</h3>
         <p>{{itemPokemon.id}}</p>
       </div>
       <div class="img-wrapper">
-        <p>{{itemPokemon.types[0].type.name}}</p>
+        <p :class="bgType">{{itemPokemon.types[0].type.name}}</p>
         <img :src="itemPokemon.sprites.other['official-artwork'].front_default">
       </div>
     </div>
@@ -20,15 +20,19 @@ export default {
   data() {
     return {
       itemPokemon: "",
+      typeCard: "",
+      bgType:"",
     }
   },
   methods: {
     async loadPokemon() {
       this.itemPokemon = await getPokemon(this.pokemon.name);
+      this.typeCard = this.itemPokemon.types[0].type.name;
+      this.bgType = "type-" + this.itemPokemon.types[0].type.name;
     },
   },
   created() {
-    this.loadPokemon();
+    this.loadPokemon() 
   }
 }
 </script>
@@ -39,9 +43,29 @@ export default {
   height: 180px;
   margin: 0 15px 25px 15px;
   border-radius: 15px;
-  background: #48D0B0;
+  background: #71a398;
   cursor: pointer;
 }
+
+/* background card */
+.bug {background: var(--bg-bug);}
+.dark {background: var(--bg-dark);}
+.dragon {background: var(--bg-dragon);}
+.eletric {background: var(--bg-eletric);}
+.fairy {background: var(--bg-fairy);}
+.fighting {background: var(--bg-fighting);}
+.fire {background: var(--bg-fire);}
+.flying {background: var(--bg-flying);}
+.ghost {background: var(--bg-ghost);}
+.grass {background: var(--bg-grass);}
+.ground {background: var(--bg-ground);}
+.ice {background: var(--bg-ice);}
+.normal {background: var(--bg-normal);}
+.poision {background: var(--bg-poision);}
+.psychic {background: var(--bg-psychic);}
+.rock {background: var(--bg-rock);}
+.steel {background: var(--bg-steel);}
+.water {background: var(--bg-water);}
 
 .card h3 {
   font-family: var(--font-secondary);
@@ -61,6 +85,7 @@ export default {
   font-family: var(--font-secondary);
   font-size: 1rem;
   font-weight: bold;
+  color: var(--number-pokemon);
   padding-top: 15px;
   padding-right: 20px;
 }
@@ -78,12 +103,31 @@ export default {
   font-size: 1.125rem;
   text-transform: capitalize;
   color: #fff;
-  background: #60DFC8;
   width: 88px;
   height: 30px;
   border-radius: 10px;
   margin-left: 10px;
 }
+
+/* background type */
+.type-bug {background: var(--type-bug);}
+.type-dark {background: var(--type-dark);}
+.type-dragon {background: var(--type-dragon);}
+.type-eletric {background: var(--type-eletric);}
+.type-fairy {background: var(--type-fairy);}
+.type-fighting {background: var(--type-fighting);}
+.type-fire {background: var(--type-fire);}
+.type-flying {background: var(--type-flying);}
+.type-ghost {background: var(--type-ghost);}
+.type-grass {background: var(--type-grass);}
+.type-ground {background: var(--type-ground);}
+.type-ice {background: var(--type-ice);}
+.type-normal {background: var(--type-normal);}
+.type-poision {background: var(--type-poision);}
+.type-psychic {background: var(--type-psychic);}
+.type-rock {background: var(--type-rock);}
+.type-steel {background: var(--type-steel);}
+.type-water {background: var(--type-water);}
 
 .img-wrapper img {
   width: 50%;

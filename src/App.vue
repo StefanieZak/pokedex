@@ -79,7 +79,7 @@ button {
   --bg-eletric:#FFD86F;
   --bg-fairy:#EC2674;
   --bg-fighting:#F0623A;
-  --bg-fire:##FB926C;
+  --bg-fire:#FB926C;
   --bg-flying:#9FB9CB;
   --bg-ghost:#906791;
   --bg-grass:#48D0B0;
@@ -98,7 +98,7 @@ button {
   --type-eletric:#FAE8A2;
   --type-fairy:#EF71A3;
   --type-fighting:#FE8C6B;
-  --type-fire:##FDB69C;
+  --type-fire:#FDB69C;
   --type-flying:#B7CEDD;
   --type-ghost:#B282B4;
   --type-grass:#60DFC8;
