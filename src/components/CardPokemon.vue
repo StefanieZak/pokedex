@@ -2,7 +2,7 @@
     <div class="card" :class="typeCard" v-if="itemPokemon">
       <div class="number-wrapper">
         <h3>{{pokemon.name}}</h3>
-        <p>{{itemPokemon.id | numeroPokemon}}</p>
+        <p>{{itemPokemon.id | pokemonNumber}}</p>
       </div>
       <div class="img-wrapper">
         <p :class="bgType">{{itemPokemon.types[0].type.name}}</p>
@@ -132,5 +132,64 @@ export default {
 .img-wrapper img {
   width: 50%;
   margin-right: 10px;
+}
+
+@media screen and (max-width: 780px) {
+.card {
+    width: 160px;
+    height: 160px;
+     margin: 0 25px 25px 25px;
+  }
+
+.card h3 {
+  font-size: 1.2rem;
+}
+
+.number-wrapper p {
+  font-size: 0.875rem;
+}
+
+.img-wrapper {
+  position: relative;
+}
+
+.img-wrapper img {
+  position: absolute;
+  left: 60%;
+  width: 70%;
+}
+
+.img-wrapper p {
+  font-size: 1rem;
+  width: 88px;
+  height: 30px;
+  margin-left: 10px;
+}
+}
+
+@media screen and (max-width: 500px) {
+  .card {
+    width: 140px;
+    height: 140px;
+    margin: 0 25px 25px 25px;
+  }
+
+.card h3 {
+  font-size: 1rem;
+}
+
+.img-wrapper img {
+  position: absolute;
+  left: 60%;
+  top: -10px;
+  width: 70%;
+}
+
+.img-wrapper p {
+  font-size: 0.875rem;
+  width: 80px;
+  height: 25px;
+  margin-left: 5px;
+}
 }
 </style>

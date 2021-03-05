@@ -5,7 +5,7 @@ import store from "./store";
 
 Vue.config.productionTip = false;
 
-Vue.filter("numeroPokemon", (valor) => {
+Vue.filter("pokemonNumber", (valor) => {
   valor = Number(valor);
   if (valor < 10) {
     return "00" + valor;
