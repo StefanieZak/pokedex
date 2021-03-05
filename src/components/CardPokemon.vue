@@ -51,7 +51,7 @@ export default {
 .bug {background: var(--bg-bug);}
 .dark {background: var(--bg-dark);}
 .dragon {background: var(--bg-dragon);}
-.eletric {background: var(--bg-eletric);}
+.electric {background: var(--bg-electric);}
 .fairy {background: var(--bg-fairy);}
 .fighting {background: var(--bg-fighting);}
 .fire {background: var(--bg-fire);}
@@ -113,7 +113,7 @@ export default {
 .type-bug {background: var(--type-bug);}
 .type-dark {background: var(--type-dark);}
 .type-dragon {background: var(--type-dragon);}
-.type-eletric {background: var(--type-eletric);}
+.type-electric {background: var(--type-electric);}
 .type-fairy {background: var(--type-fairy);}
 .type-fighting {background: var(--type-fighting);}
 .type-fire {background: var(--type-fire);}

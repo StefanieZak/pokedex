@@ -76,7 +76,7 @@ button {
   --bg-bug: #53D26E;
   --bg-dark:#040708;
   --bg-dragon:#63CAD9;
-  --bg-eletric:#FFD86F;
+  --bg-electric:#FFD86F;
   --bg-fairy:#EC2674;
   --bg-fighting:#F0623A;
   --bg-fire:#FB926C;
@@ -95,7 +95,7 @@ button {
   --type-bug: #7EE895;
   --type-dark:#20373F;
   --type-dragon:#77E2F1;
-  --type-eletric:#FAE8A2;
+  --type-electric:#F0C314;
   --type-fairy:#EF71A3;
   --type-fighting:#FE8C6B;
   --type-fire:#FDB69C;
