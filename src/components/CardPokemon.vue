@@ -171,7 +171,7 @@ export default {
   .card {
     width: 140px;
     height: 140px;
-    margin: 0 25px 25px 25px;
+    margin: 0 10px 25px 10px;
   }
 
 .card h3 {
@@ -180,9 +180,8 @@ export default {
 
 .img-wrapper img {
   position: absolute;
-  left: 60%;
-  top: -10px;
-  width: 70%;
+  left: 50%;
+  width: 65%;
 }
 
 .img-wrapper p {
