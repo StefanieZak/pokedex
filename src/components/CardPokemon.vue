@@ -1,11 +1,14 @@
 <template>
     <div class="card" :class="typeCard" v-if="itemPokemon">
       <div class="number-wrapper">
-        <h3>{{pokemon.name}}</h3>
+        <h3>{{itemPokemon.name}}</h3>
         <p>{{itemPokemon.id | pokemonNumber}}</p>
       </div>
       <div class="img-wrapper">
+        <div>
         <p :class="bgType">{{itemPokemon.types[0].type.name}}</p>
+        <p :class="bgType" v-if="itemPokemon.types[1]">{{itemPokemon.types[1].type.name}}</p>
+        </div>
         <img :src="itemPokemon.sprites.other['official-artwork'].front_default">
       </div>
     </div>
@@ -61,7 +64,7 @@ export default {
 .ground {background: var(--bg-ground);}
 .ice {background: var(--bg-ice);}
 .normal {background: var(--bg-normal);}
-.poision {background: var(--bg-poision);}
+.poison {background: var(--bg-poison);}
 .psychic {background: var(--bg-psychic);}
 .rock {background: var(--bg-rock);}
 .steel {background: var(--bg-steel);}
@@ -109,6 +112,10 @@ export default {
   margin-left: 10px;
 }
 
+.img-wrapper p:first-child {
+  margin-bottom: 10px;
+}
+
 /* background type */
 .type-bug {background: var(--type-bug);}
 .type-dark {background: var(--type-dark);}
@@ -123,7 +130,7 @@ export default {
 .type-ground {background: var(--type-ground);}
 .type-ice {background: var(--type-ice);}
 .type-normal {background: var(--type-normal);}
-.type-poision {background: var(--type-poision);}
+.type-poison {background: var(--type-poison);}
 .type-psychic {background: var(--type-psychic);}
 .type-rock {background: var(--type-rock);}
 .type-steel {background: var(--type-steel);}

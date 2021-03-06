@@ -25,7 +25,7 @@ import Grass from "../views/types/Grass.vue";
 import Ground from "../views/types/Ground.vue";
 import Ice from "../views/types/Ice.vue";
 import Normal from "../views/types/Normal.vue";
-import Poision from "../views/types/Poision.vue";
+import Poison from "../views/types/Poison.vue";
 import Psychic from "../views/types/Psychic.vue";
 import Rock from "../views/types/Rock.vue";
 import Steel from "../views/types/Steel.vue";
@@ -162,9 +162,9 @@ const routes = [
         component: Normal,
       },
       {
-        path: "poision",
-        name: "poision",
-        component: Poision,
+        path: "poison",
+        name: "poison",
+        component: Poison,
       },
       {
         path: "psychic",

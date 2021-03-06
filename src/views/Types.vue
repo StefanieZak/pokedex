@@ -81,9 +81,9 @@
           </router-link>
         </div>
         <div class="btn-types">
-          <router-link :to="{name: 'poision'}">
-            <img src="..\assets\type-poision.svg">
-            <p class="type-poision">Poision</p>          
+          <router-link :to="{name: 'poison'}">
+            <img src="..\assets\type-poison.svg">
+            <p class="type-poison">Poison</p>          
           </router-link>
         </div>
         <div class="btn-types">
@@ -155,7 +155,7 @@ export default {
 .type-ground {background: var(--type-ground);}
 .type-ice {background: var(--type-ice);}
 .type-normal {background: var(--type-normal);}
-.type-poision {background: var(--type-poision);}
+.type-poison {background: var(--type-poison);}
 .type-psychic {background: var(--type-psychic);}
 .type-rock {background: var(--type-rock);}
 .type-steel {background: var(--type-steel);}

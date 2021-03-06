@@ -12,6 +12,8 @@ Vue.filter("pokemonNumber", (valor) => {
   }
   if (valor < 100) {
     return "0" + valor;
+  } else {
+    return valor;
   }
 });
 

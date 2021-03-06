@@ -1,5 +1,5 @@
 <template>
-  <section class="container">
+  <section class="container" v-on:scroll="infinityScroll">
     <h2>All Pokemons</h2>
     <div class="card-wrapper" v-if="pokemons">
       <div v-for="(pokemon, index) in pokemons" :key="index">
@@ -21,15 +21,30 @@ export default {
   data() {
     return {
       pokemons: "",
+      limit: 36,
+      offset: 0,
     }
   },
   methods: {
     async loadPokemons() {
-      this.pokemons = await getPokemons();
+      this.pokemons = await getPokemons(this.limit, this.offset);
     },
+    async infinityScroll() {
+      const scroll = window.scrollY;
+      const height = document.body.offsetHeight - window.innerHeight;
+      if (scroll > height * 0.90) {
+        this.pokemons = await getPokemons(this.limit, this.offset)
+          this.offset += 36;
+        console.log(height,this.limit, this.offset, this.pokemons);
+      }
+    }
   },
   created() {
     this.loadPokemons();
+    window.addEventListener('scroll', this.infinityScroll);
+  },
+  destroyed() {
+    window.removeEventListener('scroll', this.infinityScroll);
   }
 }
 </script>

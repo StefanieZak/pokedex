@@ -86,7 +86,7 @@ button {
   --bg-ground:#A9702D;
   --bg-ice:#95D1EB;
   --bg-normal:#EAB4C4;
-  --bg-poision:#AE88DD;
+  --bg-poison:#AE88DD;
   --bg-psychic:#FF73BE;
   --bg-rock:#7D7D7D;
   --bg-steel:#4DAD8D;
@@ -105,7 +105,7 @@ button {
   --type-ground:#C98638;
   --type-ice:#AADFF6;
   --type-normal:#FFC5D6;
-  --type-poision:#C89DFD;
+  --type-poison:#C89DFD;
   --type-psychic:#FE9DD1;
   --type-rock:#A1A0A0;
   --type-steel:#59C5A1;
