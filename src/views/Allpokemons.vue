@@ -38,12 +38,10 @@ export default {
     infiniteHandler($state) {
       api.get(`pokemon?limit=${this.limit}&offset=${this.offset}`)
       .then(({ data }) => {
-        console.log("fora", data);
         if (data.results.length) {
           this.offset += 36;
           this.pokemons.push(...data.results);
           $state.loaded();
-        console.log("dentro");
         } else {
           $state.complete();
         }
