@@ -5,49 +5,49 @@
         <div class="btn-generation">
         <router-link :to="{name: 'generationI'}">
           Generation I
-          <img src="..\assets\Pokemon-G1.svg">
+          <img src="@/assets/Pokemon-G1.svg">
         </router-link>
         </div>
         <div class="btn-generation">
         <router-link :to="{name: 'generationII'}">
           Generation II
-          <img src="..\assets\Pokemon-G2.svg">
+          <img src="@/assets/Pokemon-G2.svg">
         </router-link>
         </div>
         <div class="btn-generation">
         <router-link :to="{name: 'generationIII'}">
           Generation III
-          <img src="..\assets\Pokemon-G3.svg">
+          <img src="@/assets/Pokemon-G3.svg">
         </router-link>
         </div>
             <div class="btn-generation">
         <router-link :to="{name: 'generationIV'}">
           Generation IV
-          <img src="..\assets\Pokemon-G4.svg">
+          <img src="@/assets/Pokemon-G4.svg">
         </router-link>
         </div>
         <div class="btn-generation">
         <router-link :to="{name: 'generationV'}">
           Generation V
-          <img src="..\assets\Pokemon-G5.svg">
+          <img src="@/assets/Pokemon-G5.svg">
         </router-link>
         </div>
         <div class="btn-generation">
         <router-link :to="{name: 'generationVI'}">
           Generation VI
-          <img src="..\assets\Pokemon-G6.svg">
+          <img src="@/assets/Pokemon-G6.svg">
         </router-link>
         </div>
         <div class="btn-generation">
         <router-link :to="{name: 'generationVII'}">
           Generation VII
-          <img src="..\assets\Pokemon-G7.svg">
+          <img src="@/assets/Pokemon-G7.svg">
         </router-link>
         </div>
         <div class="btn-generation">
         <router-link :to="{name: 'generationVIII'}">
           Generation VIII
-          <img src="..\assets\Pokemon-G8.svg">
+          <img src="@/assets/Pokemon-G8.svg">
         </router-link>
         </div>
       </div>
