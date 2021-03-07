@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { getPokemon } from "@/services.js";
+import { api } from "@/services.js";
 
 export default {
   name: 'CardPokemon',
@@ -28,14 +28,17 @@ export default {
     }
   },
   methods: {
-    async loadPokemon() {
-      this.itemPokemon = await getPokemon(this.pokemon.name);
-      this.typeCard = this.itemPokemon.types[0].type.name;
-      this.bgType = "type-" + this.itemPokemon.types[0].type.name;
-    },
+    getPokemon(name) {
+      api.get(`pokemon/${name}`)
+      .then(response => {
+        this.itemPokemon = response.data;
+        this.typeCard = this.itemPokemon.types[0].type.name;
+        this.bgType = "type-" + this.itemPokemon.types[0].type.name;
+      });
+    }
   },
   created() {
-    this.loadPokemon() 
+    this.getPokemon(this.pokemon.name); 
   }
 }
 </script>
@@ -141,11 +144,11 @@ export default {
   margin-right: 10px;
 }
 
-@media screen and (max-width: 780px) {
+@media screen and (max-width: 790px) {
 .card {
     width: 160px;
     height: 160px;
-     margin: 0 25px 25px 25px;
+    margin: 0 20px 25px 20px;
   }
 
 .card h3 {
@@ -174,7 +177,7 @@ export default {
 }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 570px) {
   .card {
     width: 140px;
     height: 140px;

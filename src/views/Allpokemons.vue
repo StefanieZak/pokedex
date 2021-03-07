@@ -1,51 +1,59 @@
 <template>
-  <section class="container" v-on:scroll="infinityScroll">
+  <section class="container">
     <h2>All Pokemons</h2>
     <div class="card-wrapper" v-if="pokemons">
       <div v-for="(pokemon, index) in pokemons" :key="index">
-        <CardPokemon :pokemon="pokemon"/>  
-      </div>  
+        <CardPokemon :pokemon="pokemon"/>
+      </div>
+      <infinite-loading @infinite="infiniteHandler"></infinite-loading>
     </div>
   </section>
 </template>
 
 <script>
-import { getPokemons } from "@/services.js";
-import CardPokemon from "@/components/CardPokemon.vue"
+import CardPokemon from "@/components/CardPokemon.vue";
+import { api } from "@/services.js";
+import InfiniteLoading from 'vue-infinite-loading';
 
 export default {
   name: 'Allpokemons',
   components: {
-    CardPokemon
+    CardPokemon,
+    InfiniteLoading,
   },
   data() {
     return {
-      pokemons: "",
+      pokemons: [],
       limit: 36,
-      offset: 0,
+      offset: 36,
     }
   },
   methods: {
-    async loadPokemons() {
-      this.pokemons = await getPokemons(this.limit, this.offset);
+    getPokemons() {
+      api.get(`pokemon?limit=36&offset=0`)
+      .then(response => {
+        this.pokemons = response.data.results;
+      });
     },
-    async infinityScroll() {
-      const scroll = window.scrollY;
-      const height = document.body.offsetHeight - window.innerHeight;
-      if (scroll > height * 0.90) {
-        this.pokemons = await getPokemons(this.limit, this.offset)
+    infiniteHandler($state) {
+      api.get(`pokemon?limit=${this.limit}&offset=${this.offset}`)
+      .then(({ data }) => {
+        console.log("fora", data);
+        if (data.results.length) {
           this.offset += 36;
-        console.log(height,this.limit, this.offset, this.pokemons);
-      }
-    }
+          this.pokemons.push(...data.results);
+          $state.loaded();
+        console.log("dentro");
+        } else {
+          $state.complete();
+        }
+      });
+    },
   },
   created() {
-    this.loadPokemons();
-    window.addEventListener('scroll', this.infinityScroll);
+    this.getPokemons();
+
   },
-  destroyed() {
-    window.removeEventListener('scroll', this.infinityScroll);
-  }
 }
 </script>
 
