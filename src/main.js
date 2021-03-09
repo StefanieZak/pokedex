@@ -18,6 +18,11 @@ Vue.filter("pokemonNumber", (valor) => {
   }
 });
 
+Vue.filter("weightHeightPokemon", (valor) => {
+  valor = valor / 10;
+  return valor;
+});
+
 Vue.use(InfiniteLoading, {}),
   new Vue({
     router,

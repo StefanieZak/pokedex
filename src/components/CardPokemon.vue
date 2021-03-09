@@ -122,26 +122,6 @@ export default {
   margin-bottom: 10px;
 }
 
-/* background type */
-.type-bug {background: var(--type-bug);}
-.type-dark {background: var(--type-dark);}
-.type-dragon {background: var(--type-dragon);}
-.type-electric {background: var(--type-electric);}
-.type-fairy {background: var(--type-fairy);}
-.type-fighting {background: var(--type-fighting);}
-.type-fire {background: var(--type-fire);}
-.type-flying {background: var(--type-flying);}
-.type-ghost {background: var(--type-ghost);}
-.type-grass {background: var(--type-grass);}
-.type-ground {background: var(--type-ground);}
-.type-ice {background: var(--type-ice);}
-.type-normal {background: var(--type-normal);}
-.type-poison {background: var(--type-poison);}
-.type-psychic {background: var(--type-psychic);}
-.type-rock {background: var(--type-rock);}
-.type-steel {background: var(--type-steel);}
-.type-water {background: var(--type-water);}
-
 .img-wrapper img {
   width: 50%;
   margin-right: 10px;

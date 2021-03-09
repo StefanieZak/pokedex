@@ -1,10 +1,60 @@
 <template>
   <section class="container">
-    <h3>{{dadosPokemon.name}}</h3>
-    <p>{{dadosPokemon.id | pokemonNumber}}</p>
-    <p>{{dadosPokemon.types[0].type.name}}</p>
-    <p>{{dadosPokemon.types[1].type.name}}</p>
-    <img :src="dadosPokemon.sprites.other['official-artwork'].front_default">
+    <div class="bg-pokemon" :class="bg"></div>
+    <div class="wrapper" v-if="dadosPokemon">
+    <div class="first-column">
+     <nav class="nav-pokemon">
+      <router-link to="">About</router-link>
+      <router-link to="">Base Stats</router-link>
+      <router-link to="">Evolution</router-link>
+     </nav>
+      <table>
+        <tr v-if="species">
+        <td>Habitat</td>
+        <td>{{species.habitat.name}}</td>
+        </tr>
+        <tr>
+        <td>Height</td>
+        <td class="lower-case">{{dadosPokemon.height | weightHeightPokemon}} m</td>
+        </tr>
+        <tr>
+        <td>Weight</td>
+        <td class="lower-case">{{dadosPokemon.weight | weightHeightPokemon}} kg</td>
+        </tr>
+        <tr>
+        <td>Abilities</td>
+        <td>{{dadosPokemon.abilities[0].ability.name}}</td>
+        <td v-if="dadosPokemon.abilities[1]">{{dadosPokemon.abilities[1].ability.name}}</td>
+        </tr>
+        <tr v-if="species">
+        <td>Egg groups</td>
+        <td>{{species.egg_groups[0].name}}</td>
+        <td v-if="species.egg_groups[1]">{{species.egg_groups[1].name}}</td>
+        </tr>
+        <tr v-if="description.descriptions">
+        <td>Description</td>
+        <td class="first-lether">{{description.descriptions[2].description}}</td>
+        </tr>
+      </table>
+      <div class="capture" v-if="species">
+        <p>Capture Rate</p>
+        <div class="progress">
+          <div class="progress-done">{{species.capture_rate}}</div>
+        </div>
+      </div>
+    </div>
+      <div class="second-column">
+        <div class="number-wrapper">
+        <h3>{{dadosPokemon.name}}</h3>
+        <p>{{dadosPokemon.id | pokemonNumber}}</p>
+        </div>
+        <div class="type-wrapper">
+        <p :class="bgType">{{dadosPokemon.types[0].type.name}}</p>
+        <p :class="bgType" v-if="dadosPokemon.types[1]">{{dadosPokemon.types[1].type.name}}</p>
+        </div>
+        <img :src="dadosPokemon.sprites.other['official-artwork'].front_default">
+      </div>
+    </div>
   </section>
 </template>
 
@@ -16,6 +66,10 @@ export default {
   data() {
     return {
       dadosPokemon: "",
+      description: "",
+      species: "",
+      bg: "",
+      bgType: "",
     }
   },
   methods: {
@@ -23,15 +77,206 @@ export default {
       api.get(`pokemon/${name}`)
       .then(response => {
         this.dadosPokemon = response.data;
+        this.bg = this.dadosPokemon.types[0].type.name;
+        this.bgType = "type-" + this.dadosPokemon.types[0].type.name;
+        this.getDescription(this.dadosPokemon.id);
+        this.getSpecies(this.dadosPokemon.id);
+      });
+    },
+    getDescription(id) {
+      api.get(`characteristic/${id}`)
+      .then(response => {
+        this.description = response.data;
+      });
+    },
+    getSpecies(id) {
+      api.get(`pokemon-species/${id}`)
+      .then(response => {
+        this.species = response.data;
+        this.captureRate(this.species.capture_rate);
+      });
+    },
+    captureRate(valor) {
+      this.$nextTick(() => {
+      const progress = document.querySelector(".progress-done");
+      console.log(progress);
+      progress.style.width = ( valor / 6) + "%";
+      progress.style.opacity = 1;
       });
     }
   },
   created() {
-    this.getPokemon(this.$route.params.id); 
+    this.getPokemon(this.$route.params.id);
   }
 }
 </script>
 
 <style scoped>
+.container {
+  position: relative;
+  overflow: hidden;
+}
 
+.wrapper {
+  display: flex;
+}
+
+.bg-pokemon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-style: solid;
+  border-width: 0 700px 600px 0;
+}
+
+.bug {border-color: transparent var(--bg-bug) transparent transparent;}
+.dark {border-color: transparent var(--bg-dark) transparent transparent;}
+.dragon {border-color: transparent var(--bg-dragon) transparent transparent;}
+.electric {border-color: transparent var(--bg-electric) transparent transparent;}
+.fairy {border-color: transparent var(--bg-fairy) transparent transparent;}
+.fighting {border-color: transparent var(--bg-fighting) transparent transparent;}
+.fire {border-color: transparent var(--bg-fire) transparent transparent;}
+.flying {border-color: transparent var(--bg-flying) transparent transparent;}
+.ghost {border-color: transparent var(--bg-ghost) transparent transparent;}
+.grass {border-color: transparent var(--bg-grass) transparent transparent;}
+.ground {border-color: transparent var(--bg-ground) transparent transparent;}
+.ice {border-color: transparent var(--bg-ice) transparent transparent;}
+.normal {border-color: transparent var(--bg-normal) transparent transparent;}
+.poison {border-color: transparent var(--bg-poison) transparent transparent;}
+.psychic {border-color: transparent var(--bg-psychic) transparent transparent;}
+.rock {border-color: transparent var(--bg-rock) transparent transparent;}
+.steel {border-color: transparent var(--bg-steel) transparent transparent;}
+.water {border-color: transparent var(--bg-water) transparent transparent;}
+
+.first-column {
+  width: 60%;
+}
+
+.nav-pokemon {
+  display: flex;
+  width: 80%;
+  border-bottom: 3px solid #EBEBEB;
+}
+
+.nav-pokemon a {
+  margin: 60px 74px 10px 0;
+  color: #BFBFC0;
+  font-family: var(--font-secondary);
+  font-size: 1.125rem;
+  font-weight: bold;
+}
+
+.nav-pokemon a:hover {
+  color: #222;
+}
+
+.router-link-exact-active {
+  color: #222;
+}
+
+table {
+  width: 60%;
+  font-family: var(--font-secondary);
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: capitalize;
+  margin-top: 30px;
+  border-collapse: separate; 
+  border-spacing: 0 1rem ;
+}
+
+table td {
+  margin-left: 10px;
+}
+
+table td:first-child {
+  color: #BFBFC0;
+}
+
+.lower-case {
+  text-transform: lowercase;
+}
+
+.first-lether {
+  text-transform: initial;
+}
+
+.first-column {
+  z-index: 2;
+}
+
+.first-column p {
+  font-family: var(--font-secondary);
+  font-size: 1rem;
+  font-weight: bold;
+  color: #BFBFC0;
+  margin-bottom: 1rem;
+}
+
+.progress {
+	background-color: #d8d8d8;
+	border-radius: 20px;
+	position: relative;
+	margin: 15px 0;
+	height: 20px;
+	width: 300px;
+}
+
+.progress-done {
+	background: linear-gradient(to left, #70f27b, #f34a4a);
+	border-radius: 20px;
+  color: #222;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	width: 0;
+	opacity: 0;
+	transition: 1s ease 0.3s;
+  padding-left: 5px;
+}
+
+.second-column {
+  z-index: 2;
+}
+
+.second-column img {
+  margin-top: 10px;
+}
+
+.number-wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.number-wrapper h3 {
+  font-family: var(--font-secondary);
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-transform: capitalize;
+  color: #fff;
+  margin: 20px 0 20px 0;
+}
+
+.number-wrapper p {
+  font-family: var(--font-secondary);
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--number-pokemon);
+  margin-top: 20px;
+}
+
+.type-wrapper {
+  display: flex;
+}
+
+.type-wrapper p {
+  font-family: var(--font-secondary);
+  font-size: 1.125rem;
+  text-transform: capitalize;
+  color: #fff;
+  margin-right: 15px;
+  padding: 10px 15px;
+  border-radius: 10px;
+}
 </style>
