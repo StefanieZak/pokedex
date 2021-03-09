@@ -1,5 +1,6 @@
 <template>
-    <div class="card" :class="typeCard" v-if="itemPokemon">
+  <div class="card" :class="typeCard" v-if="itemPokemon">
+    <router-link :to="{name: 'pokemon', params: {id: itemPokemon.name}}">
       <div class="number-wrapper">
         <h3>{{itemPokemon.name}}</h3>
         <p>{{itemPokemon.id | pokemonNumber}}</p>
@@ -11,7 +12,8 @@
         </div>
         <img :src="itemPokemon.sprites.other['official-artwork'].front_default">
       </div>
-    </div>
+    </router-link>
+  </div>
 </template>
 
 <script>
@@ -19,7 +21,7 @@ import { api } from "@/services.js";
 
 export default {
   name: 'CardPokemon',
-  props: ["pokemon"],
+  props: ["pokemonContents"],
   data() {
     return {
       itemPokemon: "",
@@ -31,6 +33,7 @@ export default {
     getPokemon(name) {
       api.get(`pokemon/${name}`)
       .then(response => {
+        console.log(response);
         this.itemPokemon = response.data;
         this.typeCard = this.itemPokemon.types[0].type.name;
         this.bgType = "type-" + this.itemPokemon.types[0].type.name;
@@ -38,7 +41,7 @@ export default {
     }
   },
   created() {
-    this.getPokemon(this.pokemon.name); 
+    this.getPokemon(this.pokemonContents.name); 
   }
 }
 </script>

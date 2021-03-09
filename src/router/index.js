@@ -30,6 +30,7 @@ import Psychic from "../views/types/Psychic.vue";
 import Rock from "../views/types/Rock.vue";
 import Steel from "../views/types/Steel.vue";
 import Water from "../views/types/Water.vue";
+import Pokemon from "../views/Pokemon.vue";
 
 Vue.use(VueRouter);
 
@@ -43,6 +44,11 @@ const routes = [
     path: "/allpokemons",
     name: "allpokemons",
     component: Allpokemons,
+  },
+  {
+    path: "/pokemon/:id",
+    name: "pokemon",
+    component: Pokemon,
   },
   {
     path: "/generations",

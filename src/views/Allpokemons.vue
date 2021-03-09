@@ -2,8 +2,8 @@
   <section class="container">
     <h2>All Pokemons</h2>
     <div class="card-wrapper" v-if="pokemons">
-      <div v-for="(pokemon, index) in pokemons" :key="index">
-        <CardPokemon :pokemon="pokemon"/>
+      <div v-for="(pokemonContents, index) in pokemons" :key="index">
+          <CardPokemon :pokemonContents="pokemonContents"/>
       </div>
       <infinite-loading @infinite="infiniteHandler"></infinite-loading>
     </div>
@@ -50,7 +50,6 @@ export default {
   },
   created() {
     this.getPokemons();
-
   },
 }
 </script>
