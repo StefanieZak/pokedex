@@ -31,6 +31,9 @@ import Rock from "../views/types/Rock.vue";
 import Steel from "../views/types/Steel.vue";
 import Water from "../views/types/Water.vue";
 import Pokemon from "../views/Pokemon.vue";
+import About from "../views/About.vue";
+import BaseStats from "../views/BaseStats.vue";
+import Evolution from "../views/Evolution.vue";
 
 Vue.use(VueRouter);
 
@@ -49,6 +52,23 @@ const routes = [
     path: "/pokemon/:id",
     name: "pokemon",
     component: Pokemon,
+    children: [
+      {
+        path: "/pokemon/:id/about",
+        name: "about",
+        component: About,
+      },
+      {
+        path: "/pokemon/:id/basestats",
+        name: "basestats",
+        component: BaseStats,
+      },
+      {
+        path: "/pokemon/:id/evolution",
+        name: "evolution",
+        component: Evolution,
+      },
+    ],
   },
   {
     path: "/generations",

@@ -4,36 +4,37 @@
     <div class="wrapper" v-if="dadosPokemon">
     <div class="first-column">
      <nav class="nav-pokemon">
-      <router-link to="">About</router-link>
-      <router-link to="">Base Stats</router-link>
-      <router-link to="">Evolution</router-link>
+      <router-link :to="{name: 'about'}">About</router-link>
+      <router-link :to="{name: 'basestats'}">Base Stats</router-link>
+      <router-link :to="{name: 'evolution'}">Evolution</router-link>
      </nav>
+     <router-view></router-view>
       <table>
         <tr v-if="species">
-        <td>Habitat</td>
-        <td>{{species.habitat.name}}</td>
+          <td>Habitat</td>
+          <td>{{species.habitat.name}}</td>
         </tr>
         <tr>
-        <td>Height</td>
-        <td class="lower-case">{{dadosPokemon.height | weightHeightPokemon}} m</td>
+          <td>Height</td>
+          <td class="lower-case">{{dadosPokemon.height | weightHeightPokemon}} m</td>
         </tr>
         <tr>
-        <td>Weight</td>
-        <td class="lower-case">{{dadosPokemon.weight | weightHeightPokemon}} kg</td>
+          <td>Weight</td>
+          <td class="lower-case">{{dadosPokemon.weight | weightHeightPokemon}} kg</td>
         </tr>
         <tr>
-        <td>Abilities</td>
-        <td>{{dadosPokemon.abilities[0].ability.name}}</td>
-        <td v-if="dadosPokemon.abilities[1]">{{dadosPokemon.abilities[1].ability.name}}</td>
+          <td>Abilities</td>
+          <td>{{dadosPokemon.abilities[0].ability.name}}</td>
+          <td v-if="dadosPokemon.abilities[1]">{{dadosPokemon.abilities[1].ability.name}}</td>
         </tr>
         <tr v-if="species">
-        <td>Egg groups</td>
-        <td>{{species.egg_groups[0].name}}</td>
-        <td v-if="species.egg_groups[1]">{{species.egg_groups[1].name}}</td>
+          <td>Egg groups</td>
+          <td>{{species.egg_groups[0].name}}</td>
+          <td v-if="species.egg_groups[1]">{{species.egg_groups[1].name}}</td>
         </tr>
         <tr v-if="description.descriptions">
-        <td>Description</td>
-        <td class="first-lether">{{description.descriptions[2].description}}</td>
+          <td>Description</td>
+          <td class="first-lether">{{description.descriptions[2].description}}</td>
         </tr>
       </table>
       <div class="capture" v-if="species">
@@ -60,7 +61,7 @@
 
 <script>
 import { api } from "@/services.js";
- 
+
 export default {
   name: "Pokemon",
   data() {
@@ -107,7 +108,7 @@ export default {
   },
   created() {
     this.getPokemon(this.$route.params.id);
-  }
+  },
 }
 </script>
 
