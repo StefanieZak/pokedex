@@ -53,7 +53,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .container {
   position: relative;
   overflow: hidden;
@@ -114,68 +114,6 @@ export default {
 
 .router-link-exact-active {
   color: #222;
-}
-
-table {
-  width: 60%;
-  font-family: var(--font-secondary);
-  font-size: 1rem;
-  font-weight: bold;
-  text-transform: capitalize;
-  margin-top: 30px;
-  border-collapse: separate; 
-  border-spacing: 0 1rem ;
-}
-
-table td {
-  margin-left: 10px;
-}
-
-table td:first-child {
-  color: #BFBFC0;
-}
-
-.lower-case {
-  text-transform: lowercase;
-}
-
-.first-lether {
-  text-transform: initial;
-}
-
-.first-column {
-  z-index: 2;
-}
-
-.first-column p {
-  font-family: var(--font-secondary);
-  font-size: 1rem;
-  font-weight: bold;
-  color: #BFBFC0;
-  margin-bottom: 1rem;
-}
-
-.progress {
-	background-color: #d8d8d8;
-	border-radius: 20px;
-	position: relative;
-	margin: 15px 0;
-	height: 20px;
-	width: 300px;
-}
-
-.progress-done {
-	background: linear-gradient(to left, #70f27b, #f34a4a);
-	border-radius: 20px;
-  color: #222;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 100%;
-	width: 0;
-	opacity: 0;
-	transition: 1s ease 0.3s;
-  padding-left: 5px;
 }
 
 .second-column {

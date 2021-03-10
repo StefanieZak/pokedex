@@ -107,17 +107,6 @@ export default {
 }
 
 @media screen and (max-width: 500px) {
-.container {
-  width: 90%;
-  padding-left:0px;
-  padding-right:0px;
-}
-
- h2 {
-  margin: 35px 0 35px 0;
-  text-align: center;
-}
-
 .btn-generation a {
   margin: 0 15px 25px 15px;
   width: 130px;

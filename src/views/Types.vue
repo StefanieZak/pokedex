@@ -181,12 +181,6 @@ export default {
 }
 
 @media screen and (max-width: 600px) {
-  .container {
-    width: 90%;
-    padding-left:0px;
-    padding-right:0px;
-  }
-
   .types-wrapper {
     padding-left: 10px;
     padding-right: 10px;

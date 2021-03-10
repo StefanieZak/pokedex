@@ -166,4 +166,17 @@ button {
 .type-rock {background: var(--type-rock);}
 .type-steel {background: var(--type-steel);}
 .type-water {background: var(--type-water);}
+
+@media screen and (max-width: 500px) {
+  .container {
+    width: 90%;
+    padding-left:0px;
+    padding-right:0px;
+  }
+
+  h2 {
+    margin: 35px 0 35px 0;
+    text-align: center;
+  }
+}
 </style>

@@ -33,7 +33,6 @@ export default {
     getPokemon(name) {
       api.get(`pokemon/${name}`)
       .then(response => {
-        console.log(response);
         this.itemPokemon = response.data;
         this.typeCard = this.itemPokemon.types[0].type.name;
         this.bgType = "type-" + this.itemPokemon.types[0].type.name;

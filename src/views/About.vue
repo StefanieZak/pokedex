@@ -78,7 +78,6 @@ export default {
     captureRate(valor) {
       this.$nextTick(() => {
       const progress = document.querySelector(".progress-done");
-      console.log(progress);
       progress.style.width = ( valor / 6) + "%";
       progress.style.opacity = 1;
       });
@@ -91,5 +90,107 @@ export default {
 </script>
 
 <style scoped>
+table {
+  width: 60%;
+  font-family: var(--font-secondary);
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: capitalize;
+  margin-top: 30px;
+  border-collapse: separate; 
+  border-spacing: 0 1rem ;
+}
 
+table td {
+  margin-left: 10px;
+}
+
+table td:first-child {
+  color: #BFBFC0;
+}
+
+.lower-case {
+  text-transform: lowercase;
+}
+
+.first-lether {
+  text-transform: initial;
+}
+
+.first-column {
+  z-index: 2;
+}
+
+.first-column p {
+  font-family: var(--font-secondary);
+  font-size: 1rem;
+  font-weight: bold;
+  color: #BFBFC0;
+  margin-bottom: 1rem;
+}
+
+.progress {
+	background-color: #d8d8d8;
+	border-radius: 20px;
+	position: relative;
+	margin: 15px 0;
+	height: 20px;
+	width: 300px;
+}
+
+.progress-done {
+	background: linear-gradient(to left, #70f27b, #f34a4a);
+	border-radius: 20px;
+  color: #222;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	width: 0;
+	opacity: 0;
+	transition: 1s ease 0.3s;
+  padding-left: 5px;
+}
+
+/* Mobile */
+@media screen and (max-width: 780px) {
+   table {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .capture {
+    display: flex;
+  }
+
+  .progress {
+    height: 15px;
+    width: 300px;
+    margin: 2px 0 0 25px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+   table {
+    font-size: 0.75rem;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .first-column p {
+    font-size: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .capture {
+    display: flex;
+  }
+
+  .progress {
+    font-size: 0.75rem;
+    height: 10px;
+    width: 180px;
+    margin: 2px 0 0 8%;
+  }
+}
 </style>
