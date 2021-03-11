@@ -1,37 +1,37 @@
 <template>
-  <section>
-    <table v-if="dadosPokemon">
-        <tr v-if="species">
-          <td>Habitat</td>
-          <td>{{species.habitat.name}}</td>
-        </tr>
-        <tr>
-          <td>Height</td>
-          <td class="lower-case">{{dadosPokemon.height | weightHeightPokemon}} m</td>
-        </tr>
-        <tr>
-          <td>Weight</td>
-          <td class="lower-case">{{dadosPokemon.weight | weightHeightPokemon}} kg</td>
-        </tr>
-        <tr>
-          <td>Abilities</td>
-          <td>{{dadosPokemon.abilities[0].ability.name}}</td>
-          <td v-if="dadosPokemon.abilities[1]">{{dadosPokemon.abilities[1].ability.name}}</td>
-        </tr>
-        <tr v-if="species">
-          <td>Egg groups</td>
-          <td>{{species.egg_groups[0].name}}</td>
-          <td v-if="species.egg_groups[1]">{{species.egg_groups[1].name}}</td>
-        </tr>
-        <tr v-if="description.descriptions">
-          <td>Description</td>
-          <td class="first-lether">{{description.descriptions[2].description}}</td>
-        </tr>
-      </table>
+  <section class="box">
+    <div v-if="dadosPokemon">
+        <div class="info-wrapper" v-if="species">
+          <p>Habitat</p>
+          <p>{{species.habitat.name}}</p>
+        </div>
+        <div class="info-wrapper">
+          <p>Height</p>
+          <p class="lower-case">{{dadosPokemon.height | weightHeightPokemon}} m</p>
+        </div>
+        <div class="info-wrapper">
+          <p>Weight</p>
+          <p class="lower-case">{{dadosPokemon.weight | weightHeightPokemon}} kg</p>
+        </div>
+        <div class="info-wrapper">
+          <p>Abilities</p>
+          <p>{{dadosPokemon.abilities[0].ability.name}}</p>
+          <p v-if="dadosPokemon.abilities[1]">{{dadosPokemon.abilities[1].ability.name}}</p>
+        </div>
+        <div class="info-wrapper" v-if="species">
+          <p>Egg groups</p>
+          <p>{{species.egg_groups[0].name}}</p>
+          <p v-if="species.egg_groups[1]">{{species.egg_groups[1].name}}</p>
+        </div>
+        <div class="info-wrapper" v-if="description.descriptions">
+          <p>Description</p>
+          <p class="first-lether">{{description.descriptions[2].description}}</p>
+        </div>
+      </div>
       <div class="capture" v-if="species">
         <div class="rate">
         <p>Capture Rate</p>
-        <p c>{{species.capture_rate}}</p>
+        <p>{{species.capture_rate}}</p>
         </div>
         <div class="progress">
           <div class="progress-done"></div>
@@ -93,47 +93,53 @@ export default {
 </script>
 
 <style scoped>
-table {
-  width: 100%;
-  font-family: var(--font-secondary);
-  font-size: 1rem;
-  font-weight: bold;
-  text-transform: capitalize;
+.box {
   margin-top: 30px;
-  border-collapse: separate; 
-  border-spacing: 0 1rem ;
-}
-
-table td {
-  margin-left: 10px;
-}
-
-table td:first-child {
-  color: #BFBFC0;
-}
-
-.lower-case {
-  text-transform: lowercase;
-}
-
-.first-lether {
-  text-transform: initial;
 }
 
 .first-column {
   z-index: 2;
 }
 
-.first-column p {
+.info-wrapper {
+  display: flex;
+  border-bottom: 2px solid rgb(236, 236, 236);
+  width: 80%;
+}
+
+.info-wrapper p:nth-child(2),
+.info-wrapper p:nth-child(3) {
   font-family: var(--font-secondary);
   font-size: 1rem;
   font-weight: bold;
+  text-transform: capitalize;
+  color: #222;
+  margin-bottom: 1rem;
+  margin-left: 40px;
+}
+
+.info-wrapper p:first-child {
+  font-family: var(--font-secondary);
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: capitalize;
   color: #BFBFC0;
   margin-bottom: 1rem;
 }
 
+.lower-case {
+  text-transform: lowercase;
+}
+
 .rate {
   display: flex;
+}
+
+.rate p {
+  font-family: var(--font-secondary);
+  font-size: 1rem;
+  font-weight: bold;
+  color: #BFBFC0;
 }
 
 .rate p:nth-child(even) {
@@ -165,13 +171,13 @@ table td:first-child {
 
 /* Mobile */
 @media screen and (max-width: 780px) {
-   table {
-    width: 100%;
-    margin-top: 20px;
+  .box {
+    margin-left: 20px;
   }
-
+  
   .capture {
     display: flex;
+    margin-bottom: 40px;
   }
 
   .progress {
@@ -182,15 +188,26 @@ table td:first-child {
 }
 
 @media screen and (max-width: 500px) {
-   table {
-    font-size: 0.75rem;
-    width: 100%;
-    margin-top: 10px;
+  .box {
+    margin-left: 0px;
   }
 
-  .first-column p {
+  .info-wrapper p:nth-child(2),
+  .info-wrapper p:nth-child(3) {
     font-size: 0.75rem;
-    margin-bottom: 1.5rem;
+  }
+
+  .info-wrapper p:first-child {
+    font-size: 0.75rem;
+  }
+
+  .rate p {
+    font-size: 0.75rem;
+  }
+
+  .rate p:nth-child(even) {
+    margin-left: 30px;
+    color:#222;
   }
 
   .capture {
