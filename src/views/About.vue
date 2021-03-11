@@ -190,11 +190,13 @@ export default {
 @media screen and (max-width: 500px) {
   .box {
     margin-left: 0px;
+    margin-top: 10px;
   }
 
   .info-wrapper p:nth-child(2),
   .info-wrapper p:nth-child(3) {
     font-size: 0.75rem;
+    margin-left: 20px;
   }
 
   .info-wrapper p:first-child {
@@ -206,7 +208,7 @@ export default {
   }
 
   .rate p:nth-child(even) {
-    margin-left: 30px;
+    margin-left: 20px;
     color:#222;
   }
 
