@@ -1,6 +1,7 @@
 <template>
   <section class="container">
     <div class="bg-pokemon" :class="bg"></div>
+    <div class="bg-white"></div>
     <div class="wrapper" v-if="dadosPokemon">
     <div class="first-column">
      <nav class="nav-pokemon">
@@ -106,6 +107,7 @@ export default {
   font-family: var(--font-secondary);
   font-size: 1.125rem;
   font-weight: bold;
+  z-index: 1;
 }
 
 .nav-pokemon a:hover {
@@ -216,8 +218,18 @@ export default {
 
   .bg-pokemon {
     border-width: 0 0 0 0;
-    height: 40%;
+    height: 50%;
     width: 100%;
+  }
+
+  .bg-white {
+    position: absolute;
+    top: 40%;
+    right: 0;
+    height: 15%;
+    width: 100%;
+    border-radius: 40px;
+    background: #fff;
   }
 
   .bug {background: var(--bg-bug);}
@@ -238,7 +250,6 @@ export default {
   .rock {background: var(--bg-rock);}
   .steel {background: var(--bg-steel);}
   .water {background: var(--bg-water);}
-
 
   .wrapper {
     flex-flow: column;
@@ -280,8 +291,18 @@ export default {
 }
 
 @media screen and (max-width: 500px) {
+  .container {
+    width: 90%;
+  }
+
   .bg-pokemon {
     height: 35%;
+  }
+
+  .bg-white {
+    top: 30%;
+    height: 10%;
+    border-radius: 40px;
   }
 
    .number-wrapper h3 {
