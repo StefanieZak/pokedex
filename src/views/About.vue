@@ -29,9 +29,12 @@
         </tr>
       </table>
       <div class="capture" v-if="species">
+        <div class="rate">
         <p>Capture Rate</p>
+        <p c>{{species.capture_rate}}</p>
+        </div>
         <div class="progress">
-          <div class="progress-done">{{species.capture_rate}}</div>
+          <div class="progress-done"></div>
         </div>
       </div>
   </section>
@@ -91,7 +94,7 @@ export default {
 
 <style scoped>
 table {
-  width: 60%;
+  width: 100%;
   font-family: var(--font-secondary);
   font-size: 1rem;
   font-weight: bold;
@@ -129,10 +132,18 @@ table td:first-child {
   margin-bottom: 1rem;
 }
 
+.rate {
+  display: flex;
+}
+
+.rate p:nth-child(even) {
+  margin-left: 20px;
+  color:#222;
+}
+
 .progress {
 	background-color: #d8d8d8;
 	border-radius: 20px;
-	position: relative;
 	margin: 15px 0;
 	height: 20px;
 	width: 300px;
@@ -166,7 +177,7 @@ table td:first-child {
   .progress {
     height: 15px;
     width: 300px;
-    margin: 2px 0 0 25px;
+    margin: 15px 0 0 8%;
   }
 }
 
@@ -188,9 +199,8 @@ table td:first-child {
 
   .progress {
     font-size: 0.75rem;
-    height: 10px;
+    height: 12px;
     width: 180px;
-    margin: 2px 0 0 8%;
   }
 }
 </style>

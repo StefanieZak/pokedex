@@ -23,7 +23,7 @@ export default {
   box-sizing: border-box;
 }
 
-body, ul, li, h1, h2, h3, p, a, button {
+body, ul, li, h1, h2, h3,h4 p, a, button {
   margin: 0px;
   padding: 0px;
 }

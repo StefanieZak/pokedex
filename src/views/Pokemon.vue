@@ -218,13 +218,13 @@ export default {
 
   .bg-pokemon {
     border-width: 0 0 0 0;
-    height: 50%;
+    height: 50vh;
     width: 100%;
   }
 
   .bg-white {
     position: absolute;
-    top: 40%;
+    top: 40vh;
     right: 0;
     height: 15%;
     width: 100%;
@@ -271,7 +271,7 @@ export default {
   }
 
   .nav-pokemon a {
-    margin: 20px 10% 10px 0;
+    margin: 20px 10% 10px 20px;
   }
 
   table {
@@ -296,11 +296,11 @@ export default {
   }
 
   .bg-pokemon {
-    height: 35%;
+    height: 35vh;
   }
 
   .bg-white {
-    top: 30%;
+    top: 30vh;
     height: 10%;
     border-radius: 40px;
   }
