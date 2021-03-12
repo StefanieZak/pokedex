@@ -33,7 +33,6 @@ import Water from "../views/types/Water.vue";
 import Pokemon from "../views/Pokemon.vue";
 import About from "../views/About.vue";
 import BaseStats from "../views/BaseStats.vue";
-import Evolution from "../views/Evolution.vue";
 
 Vue.use(VueRouter);
 
@@ -55,7 +54,7 @@ const routes = [
     children: [
       {
         path: "/pokemon/:id/about",
-        name: "about",
+        name: "pokemon",
         component: About,
       },
       {
@@ -63,156 +62,147 @@ const routes = [
         name: "basestats",
         component: BaseStats,
       },
-      {
-        path: "/pokemon/:id/evolution",
-        name: "evolution",
-        component: Evolution,
-      },
     ],
   },
   {
     path: "/generations",
     name: "generations",
     component: Generations,
-    children: [
-      {
-        path: "generationI",
-        name: "generationI",
-        component: GenerationI,
-      },
-      {
-        path: "generationII",
-        name: "generationII",
-        component: GenerationII,
-      },
-      {
-        path: "generationIII",
-        name: "generationIII",
-        component: GenerationIII,
-      },
-      {
-        path: "generationIV",
-        name: "generationIV",
-        component: GenerationIV,
-      },
-      {
-        path: "generationV",
-        name: "generationV",
-        component: GenerationV,
-      },
-      {
-        path: "generationVI",
-        name: "generationVI",
-        component: GenerationVI,
-      },
-      {
-        path: "generationVII",
-        name: "generationVII",
-        component: GenerationVII,
-      },
-      {
-        path: "generationVIII",
-        name: "generationVIII",
-        component: GenerationVIII,
-      },
-    ],
+  },
+  {
+    path: "/generationI",
+    name: "generationI",
+    component: GenerationI,
+  },
+  {
+    path: "/generationII",
+    name: "generationII",
+    component: GenerationII,
+  },
+  {
+    path: "/generationIII",
+    name: "generationIII",
+    component: GenerationIII,
+  },
+  {
+    path: "/generationIV",
+    name: "generationIV",
+    component: GenerationIV,
+  },
+  {
+    path: "/generationV",
+    name: "generationV",
+    component: GenerationV,
+  },
+  {
+    path: "/generationVI",
+    name: "generationVI",
+    component: GenerationVI,
+  },
+  {
+    path: "/generationVII",
+    name: "generationVII",
+    component: GenerationVII,
+  },
+  {
+    path: "/generationVIII",
+    name: "generationVIII",
+    component: GenerationVIII,
   },
   {
     path: "/types",
     name: "types",
     component: Types,
-    children: [
-      {
-        path: "bug",
-        name: "bug",
-        component: Bug,
-      },
-      {
-        path: "dark",
-        name: "dark",
-        component: Dark,
-      },
-      {
-        path: "dragon",
-        name: "dragon",
-        component: Dragon,
-      },
-      {
-        path: "electric",
-        name: "electric",
-        component: Electric,
-      },
-      {
-        path: "fairy",
-        name: "fairy",
-        component: Fairy,
-      },
-      {
-        path: "fighting",
-        name: "fighting",
-        component: Fighting,
-      },
-      {
-        path: "fire",
-        name: "fire",
-        component: Fire,
-      },
-      {
-        path: "flying",
-        name: "flying",
-        component: Flying,
-      },
-      {
-        path: "ghost",
-        name: "ghost",
-        component: Ghost,
-      },
-      {
-        path: "grass",
-        name: "grass",
-        component: Grass,
-      },
-      {
-        path: "ground",
-        name: "ground",
-        component: Ground,
-      },
-      {
-        path: "ice",
-        name: "ice",
-        component: Ice,
-      },
-      {
-        path: "normal",
-        name: "normal",
-        component: Normal,
-      },
-      {
-        path: "poison",
-        name: "poison",
-        component: Poison,
-      },
-      {
-        path: "psychic",
-        name: "psychic",
-        component: Psychic,
-      },
-      {
-        path: "rock",
-        name: "rock",
-        component: Rock,
-      },
-      {
-        path: "steel",
-        name: "steel",
-        component: Steel,
-      },
-      {
-        path: "water",
-        name: "water",
-        component: Water,
-      },
-    ],
+  },
+  {
+    path: "bug",
+    name: "bug",
+    component: Bug,
+  },
+  {
+    path: "dark",
+    name: "dark",
+    component: Dark,
+  },
+  {
+    path: "dragon",
+    name: "dragon",
+    component: Dragon,
+  },
+  {
+    path: "electric",
+    name: "electric",
+    component: Electric,
+  },
+  {
+    path: "fairy",
+    name: "fairy",
+    component: Fairy,
+  },
+  {
+    path: "fighting",
+    name: "fighting",
+    component: Fighting,
+  },
+  {
+    path: "fire",
+    name: "fire",
+    component: Fire,
+  },
+  {
+    path: "flying",
+    name: "flying",
+    component: Flying,
+  },
+  {
+    path: "ghost",
+    name: "ghost",
+    component: Ghost,
+  },
+  {
+    path: "grass",
+    name: "grass",
+    component: Grass,
+  },
+  {
+    path: "ground",
+    name: "ground",
+    component: Ground,
+  },
+  {
+    path: "ice",
+    name: "ice",
+    component: Ice,
+  },
+  {
+    path: "normal",
+    name: "normal",
+    component: Normal,
+  },
+  {
+    path: "poison",
+    name: "poison",
+    component: Poison,
+  },
+  {
+    path: "psychic",
+    name: "psychic",
+    component: Psychic,
+  },
+  {
+    path: "rock",
+    name: "rock",
+    component: Rock,
+  },
+  {
+    path: "steel",
+    name: "steel",
+    component: Steel,
+  },
+  {
+    path: "water",
+    name: "water",
+    component: Water,
   },
 ];
 

@@ -5,9 +5,8 @@
     <div class="wrapper" v-if="dadosPokemon">
     <div class="first-column">
      <nav class="nav-pokemon">
-      <router-link :to="{name: 'about'}">About</router-link>
+      <router-link :to="{name: 'pokemon'}">About</router-link>
       <router-link :to="{name: 'basestats'}">Base Stats</router-link>
-      <router-link :to="{name: 'evolution'}">Evolution</router-link>
      </nav>
      <router-view></router-view>
     </div>

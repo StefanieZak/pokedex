@@ -23,7 +23,7 @@ export default {
   box-sizing: border-box;
 }
 
-body, ul, li, h1, h2, h3,h4 p, a, button {
+body, ul, li, h1, h2, h3, h4, p, a, button {
   margin: 0px;
   padding: 0px;
 }
@@ -74,7 +74,7 @@ button {
 
 :root {
   --bg-bug: #53D26E;
-  --bg-dark:#040708;
+  --bg-dark:#483C5C;
   --bg-dragon:#63CAD9;
   --bg-electric:#FFD86F;
   --bg-fairy:#EC2674;
@@ -93,7 +93,7 @@ button {
   --bg-water:#79BFFE;
 
   --type-bug: #7EE895;
-  --type-dark:#20373F;
+  --type-dark:#210E40;
   --type-dragon:#77E2F1;
   --type-electric:#F0C314;
   --type-fairy:#EF71A3;
@@ -103,7 +103,7 @@ button {
   --type-ghost:#B282B4;
   --type-grass:#60DFC8;
   --type-ground:#C98638;
-  --type-ice:#AADFF6;
+  --type-ice:#63AECE;
   --type-normal:#FFC5D6;
   --type-poison:#C89DFD;
   --type-psychic:#FE9DD1;

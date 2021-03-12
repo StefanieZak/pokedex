@@ -167,7 +167,13 @@ export default {
   }
 
 .card h3 {
-  font-size: 1rem;
+  font-size: 0.875rem;
+  padding: 15px 5px 15px 10px;
+}
+
+.number-wrapper p {
+  font-size: 0.75rem;
+  padding-right: 10px;
 }
 
 .img-wrapper img {
@@ -177,7 +183,7 @@ export default {
 }
 
 .img-wrapper p {
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   width: 80px;
   height: 25px;
   margin-left: 5px;
