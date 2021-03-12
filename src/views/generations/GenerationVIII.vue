@@ -1,17 +1,50 @@
 <template>
   <section class="container">
     <h2>Generation VIII</h2>
+       <div class="card-wrapper" v-if="pokemons">
+      <div v-for="(pokemonContents, index) in pokemons" :key="index">
+          <CardPokemon :pokemonContents="pokemonContents"/>
+      </div>
+    </div>
   </section>
 </template>
 
 <script>
+import CardPokemon from "@/components/CardPokemon.vue";
+import { api } from "@/services.js";
 
 export default {
   name: 'GenerationVIII',
+  components: {
+    CardPokemon,
+  },
+  data() {
+    return {
+      pokemons: [],
+      limit: 81,
+      offset: 809,
+    }
+  },
+  methods: {
+    getPokemons() {
+      api.get(`pokemon?limit=${this.limit}&offset=${this.offset}`)
+      .then(response => {
+        this.pokemons = response.data.results;
+      });
+    },
+  },
+  created() {
+    this.getPokemons();
+  },
 }
 </script>
 
 <style scoped>
+.card-wrapper{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 
 @media screen and (max-width: 780px) {
 .container {

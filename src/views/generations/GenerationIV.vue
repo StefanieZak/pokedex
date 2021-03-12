@@ -5,53 +5,33 @@
       <div v-for="(pokemonContents, index) in pokemons" :key="index">
           <CardPokemon :pokemonContents="pokemonContents"/>
       </div>
-      <infinite-loading @infinite="infiniteHandler"></infinite-loading>
     </div>
   </section>
 </template>
 
 <script>
 import CardPokemon from "@/components/CardPokemon.vue";
-// import { api } from "@/services.js";
-import InfiniteLoading from 'vue-infinite-loading';
+import { api } from "@/services.js";
 
 export default {
   name: 'GenerationIV',
   components: {
     CardPokemon,
-    InfiniteLoading,
   },
   data() {
     return {
       pokemons: [],
-      limit: 32,
-      offset: 387,
+      limit: 107,
+      offset: 386,
     }
   },
   methods: {
-    // getPokemons() {
-    //   api.get(`pokemon?limit=${this.limit}&offset=${this.offset}`)
-    //   .then(response => {
-    //     this.pokemons = response.data.results;
-    //     this.offset += 32;
-    //   });
-    // },
-    // infiniteHandler($state) {
-    //   if(this.pokemons.length < 136) {
-    //   api.get(`pokemon?limit=${this.limit}&offset=${this.offset}`)
-    //   .then(({ data }) => {
-    //     if (data.results.length) {
-    //       this.offset += this.pokemons.length < 100 ? 10 : 2 ;
-    //       this.pokemons.push(...data.results);
-    //       $state.loaded();
-    //     } else {
-    //       $state.complete();
-    //     }
-    //   });
-    // } else {
-    //   $state.complete();
-    // }
-    // },
+    getPokemons() {
+      api.get(`pokemon?limit=${this.limit}&offset=${this.offset}`)
+      .then(response => {
+        this.pokemons = response.data.results;
+      });
+    },
   },
   created() {
     this.getPokemons();

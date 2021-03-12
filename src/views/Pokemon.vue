@@ -19,7 +19,8 @@
         <p :class="bgType">{{dadosPokemon.types[0].type.name}}</p>
         <p :class="bgType" v-if="dadosPokemon.types[1]">{{dadosPokemon.types[1].type.name}}</p>
         </div>
-        <img :src="dadosPokemon.sprites.other['official-artwork'].front_default">
+        <img v-if="dadosPokemon.sprites.other['official-artwork'].front_default" :src="dadosPokemon.sprites.other['official-artwork'].front_default">
+        <img v-else src="../assets/pokebola.png">
       </div>
     </div>
   </section>

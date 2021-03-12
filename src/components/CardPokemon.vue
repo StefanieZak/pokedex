@@ -10,7 +10,8 @@
         <p :class="bgType">{{itemPokemon.types[0].type.name}}</p>
         <p :class="bgType" v-if="itemPokemon.types[1]">{{itemPokemon.types[1].type.name}}</p>
         </div>
-        <img :src="itemPokemon.sprites.other['official-artwork'].front_default">
+        <img  v-if="itemPokemon.sprites.other['official-artwork'].front_default" :src="itemPokemon.sprites.other['official-artwork'].front_default">
+        <img v-else src="../assets/pokebola.png">
       </div>
     </router-link>
   </div>
@@ -48,7 +49,7 @@ export default {
 <style scoped>
 .card {
   width: 220px;
-  height: 180px;
+  height: 200px;
   margin: 0 15px 25px 15px;
   border-radius: 15px;
   background: #71a398;

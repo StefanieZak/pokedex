@@ -104,6 +104,7 @@ export default {
 .info-wrapper {
   display: flex;
   border-bottom: 2px solid rgb(236, 236, 236);
+  margin-bottom: 1rem;
   width: 80%;
 }
 

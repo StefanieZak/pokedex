@@ -5,7 +5,6 @@
       <div v-for="(pokemonContents, index) in pokemons" :key="index">
           <CardPokemon :pokemonContents="pokemonContents"/>
       </div>
-      <infinite-loading @infinite="infiniteHandler"></infinite-loading>
     </div>
   </section>
 </template>
@@ -13,43 +12,25 @@
 <script>
 import CardPokemon from "@/components/CardPokemon.vue";
 import { api } from "@/services.js";
-import InfiniteLoading from 'vue-infinite-loading';
 
 export default {
   name: 'GenerationI',
   components: {
     CardPokemon,
-    InfiniteLoading,
   },
   data() {
     return {
       pokemons: [],
-      limit: 36,
-      offset: 25,
+      limit: 151,
+      offset: 0,
     }
   },
   methods: {
     getPokemons() {
-      api.get(`pokemon?limit=36&offset=0`)
+      api.get(`pokemon?limit=${this.limit}&offset=${this.offset}`)
       .then(response => {
         this.pokemons = response.data.results;
       });
-    },
-    infiniteHandler($state) {
-      if(this.pokemons.length < 152) {
-      api.get(`pokemon?limit=${this.limit}&offset=${this.offset}`)
-      .then(({ data }) => {
-        if (data.results.length) {
-          this.offset += 30;
-          this.pokemons.push(...data.results);
-          $state.loaded();
-        } else {
-          $state.complete();
-        }
-      });
-    } else {
-      $state.complete();
-    }
     },
   },
   created() {
