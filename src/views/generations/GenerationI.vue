@@ -1,9 +1,9 @@
 <template>
   <section class="container">
     <h2>Generation I</h2>
-       <div class="card-wrapper" v-if="pokemons">
+    <div class="card-wrapper" v-if="pokemons">
       <div v-for="(pokemonContents, index) in pokemons" :key="index">
-          <CardPokemon :pokemonContents="pokemonContents"/>
+        <CardPokemon :pokemonContents="pokemonContents"/>
       </div>
     </div>
   </section>

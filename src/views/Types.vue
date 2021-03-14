@@ -195,4 +195,12 @@ export default {
     font-weight: bold;
   }
 }
+
+@media screen and (max-width: 500px) {
+  .container {
+    width: 90%;
+    padding-left:0px;
+    padding-right:0px;
+  }
+}
 </style>

@@ -166,4 +166,5 @@ button {
 .type-rock {background: var(--type-rock);}
 .type-steel {background: var(--type-steel);}
 .type-water {background: var(--type-water);}
+
 </style>
