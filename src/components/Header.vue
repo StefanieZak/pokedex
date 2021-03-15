@@ -4,7 +4,7 @@
       <Lights/>
       <router-link :to="{name: 'Home'}"><h1>Pokedex</h1></router-link>
     </header>
-      <form class="search-wrapper" @submit.prevent="searchPokemon">
+      <form class="search-wrapper" @submit="searchPokemon">
         <input type="text" id="search" name="search" placeholder="Name or number" v-model="search">
         <button type="submit"><img src="@/assets/lupa.svg"></button>
       </form>
@@ -22,7 +22,7 @@ export default {
   data() {
     return {
       search: "",
-     processedSearch: "",
+      processedSearch: "",
     }
   },
   methods: {
@@ -115,6 +115,10 @@ input::placeholder {
   input {
     position: absolute;
     top: 55px;
+  }
+
+  input::placeholder {
+    font-size: 0.625rem;
   }
 
   .search-wrapper img {
