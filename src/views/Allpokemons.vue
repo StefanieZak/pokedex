@@ -1,6 +1,6 @@
 <template>
   <section class="container">
-    <h2>All Pokemons</h2>
+    <h2>All Pokemon</h2>
     <div class="card-wrapper" v-if="pokemons">
       <div v-for="(pokemonContents, index) in pokemons" :key="index">
           <CardPokemon :pokemonContents="pokemonContents"/>

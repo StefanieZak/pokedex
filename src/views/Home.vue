@@ -3,7 +3,7 @@
   <section class="home-wrapper">
     <div class="btn-wrapper">
     <router-link :to="{name: 'allpokemons'}">
-      All Pokemons
+      All Pokemon
       <img class="all-btn" src="@/assets/all-btn.png">
     </router-link>
     </div>

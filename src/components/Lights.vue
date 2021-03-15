@@ -11,10 +11,10 @@ export default {
   data() {
     return {
       lights: [
-        {style: {background: 'linear-gradient(#fff, #006BFE)'}, class:'firstLight'},
-        {style: {background: 'linear-gradient(#fff, #FF0000)'}, class:'secondLight'},
-        {style: {background: 'linear-gradient(#fff, #F7FF2B)'}, class:'thirdLight'},
-        {style: {background: 'linear-gradient(#fff, #50FF1D)'}, class:'forthLight'}
+        {style: {background: 'linear-gradient(#BCD8FF, #006BFE)'}, class:'firstLight'},
+        {style: {background: 'linear-gradient(#FFBCBC, #FF0000)'}, class:'secondLight'},
+        {style: {background: 'linear-gradient(#F5FF00, #E4CC2C)'}, class:'thirdLight'},
+        {style: {background: 'linear-gradient(#D9FFCD, #2FD100)'}, class:'forthLight'}
       ]
     }
   }

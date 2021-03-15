@@ -6,7 +6,7 @@
     </header>
       <form class="search-wrapper" @submit="searchPokemon">
         <input type="text" id="search" name="search" placeholder="Name or number" v-model="search">
-        <button type="submit"><img src="@/assets/lupa.svg"></button>
+        <button type="submit"><img src="@/assets/lupa.svg" alt="search button"></button>
       </form>
   </section>
 </template>
@@ -87,8 +87,8 @@ input::placeholder {
 
   input {
     position: absolute;
-    top: 65px;
     width: 36vw;
+    top: 65px;
     left: 62vw;
   }
 
@@ -114,7 +114,9 @@ input::placeholder {
 
   input {
     position: absolute;
+    width: 38vw;
     top: 55px;
+    left: 60vw;
   }
 
   input::placeholder {
@@ -122,8 +124,9 @@ input::placeholder {
   }
 
   .search-wrapper img {
-    top: 60px;
-    left: 88vw;
+    width: 5%;
+    top: 62px;
+    left: 92vw;
   }
 }
 </style>

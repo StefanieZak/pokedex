@@ -103,7 +103,7 @@ export default {
 
 .nav-pokemon a {
   margin: 60px 74px 10px 0;
-  color: #BFBFC0;
+  color: #9e9e9e;
   font-family: var(--font-secondary);
   font-size: 1.125rem;
   font-weight: bold;

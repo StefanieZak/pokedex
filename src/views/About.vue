@@ -112,7 +112,7 @@ export default {
 .info-wrapper p:nth-child(3) {
   font-family: var(--font-secondary);
   font-size: 1rem;
-  font-weight: bold;
+  font-weight: normal;
   text-transform: capitalize;
   color: #222;
   margin-bottom: 1rem;
@@ -124,7 +124,7 @@ export default {
   font-size: 1rem;
   font-weight: bold;
   text-transform: capitalize;
-  color: #BFBFC0;
+  color: #9e9e9e;
   margin-bottom: 1rem;
 }
 
@@ -140,11 +140,12 @@ export default {
   font-family: var(--font-secondary);
   font-size: 1rem;
   font-weight: bold;
-  color: #BFBFC0;
+  color: #9e9e9e;
 }
 
 .rate p:nth-child(even) {
   margin-left: 20px;
+  font-weight: normal;
   color:#222;
 }
 
@@ -177,21 +178,20 @@ export default {
   }
   
   .capture {
-    display: flex;
     margin-bottom: 40px;
   }
 
   .progress {
     height: 15px;
     width: 300px;
-    margin: 15px 0 0 8%;
+    margin-top: 15px;
   }
 }
 
 @media screen and (max-width: 500px) {
   .box {
     margin-left: 0px;
-    margin-top: 10px;
+    margin-top: 20px;
   }
 
   .info-wrapper p:nth-child(2),
@@ -211,10 +211,6 @@ export default {
   .rate p:nth-child(even) {
     margin-left: 20px;
     color:#222;
-  }
-
-  .capture {
-    display: flex;
   }
 
   .progress {
