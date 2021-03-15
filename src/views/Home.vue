@@ -18,6 +18,9 @@
       Types
       <img class="types-btn" src="@/assets/types-btn.jpg">
     </router-link>
+
+    <div class="pokemon-guess"></div>
+
     </div>
   </section>
   </transition>

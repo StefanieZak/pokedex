@@ -4,10 +4,10 @@
       <Lights/>
       <router-link :to="{name: 'Home'}"><h1>Pokedex</h1></router-link>
     </header>
-      <div class="search-wrapper">
-        <input type="text" id="search" name="search" placeholder="Search...">
-        <img src="@/assets/lupa.svg">
-      </div>
+      <form class="search-wrapper" @submit.prevent="searchPokemon">
+        <input type="text" id="search" name="search" placeholder="Name or number" v-model="search">
+        <button type="submit"><img src="@/assets/lupa.svg"></button>
+      </form>
   </section>
 </template>
 
@@ -18,6 +18,18 @@ export default {
   name: 'Header',
   components: {
     Lights,
+  },
+  data() {
+    return {
+      search: "",
+     processedSearch: "",
+    }
+  },
+  methods: {
+    searchPokemon() {
+      this.processedSearch = this.search.toLowerCase().replace(/[.]/g, "").trim();
+      this.$router.push(`/pokemon/${this.processedSearch}/about`);
+    }
   }
 }
 </script>
@@ -60,6 +72,7 @@ input::placeholder {
   position: absolute;
   top: 75px;
   left: 480px;
+  cursor: pointer;
 }
 
 .header h1 {

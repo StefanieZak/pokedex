@@ -54,6 +54,11 @@ export default {
   border-radius: 15px;
   background: #71a398;
   cursor: pointer;
+  transition: all .3s;
+}
+
+.card:hover {
+  transform: scale(1.1);
 }
 
 /* background card */
