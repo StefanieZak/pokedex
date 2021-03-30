@@ -10,7 +10,7 @@
         <p :class="bgType">{{itemPokemon.types[0].type.name}}</p>
         <p :class="bgType" v-if="itemPokemon.types[1]">{{itemPokemon.types[1].type.name}}</p>
         </div>
-        <img  v-if="itemPokemon.sprites.other['official-artwork'].front_default" :src="itemPokemon.sprites.other['official-artwork'].front_default">
+        <img  v-if="itemPokemon.sprites.other['official-artwork'].front_default" :src="itemPokemon.sprites.other['official-artwork'].front_default" :alt="itemPokemon.name">
         <img v-else src="../assets/pokebola.png">
       </div>
     </router-link>
