@@ -26,6 +26,7 @@ import Water from "../views/types/Water.vue";
 import Pokemon from "../views/Pokemon.vue";
 import About from "../views/About.vue";
 import BaseStats from "../views/BaseStats.vue";
+import NotFound from "../components/NotFound.vue";
 
 Vue.use(VueRouter);
 
@@ -161,6 +162,11 @@ const routes = [
     path: "/water",
     name: "water",
     component: Water,
+  },
+  {
+    path: "*",
+    name: "NotFound",
+    component: NotFound,
   },
 ];
 
