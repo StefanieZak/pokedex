@@ -3,7 +3,7 @@
     <h2>Generations</h2>
       <div class="generations-wrapper">
         <div class="btn-generation" v-for="(generation, index) in generations" :key="index">
-          <router-link :to="{name: generation.link}">
+          <router-link :to="{name: 'generation', params: {id: generation.link}}">
             {{generation.title}}
             <img :src="require(`@/assets/${generation.img}`)">
           </router-link>
@@ -22,46 +22,46 @@ export default {
         { 
           link: "generationI",
           title: "Generation I",
-          img: "Pokemon-G1.svg"
+          img: "Pokemon-G1.svg",
         },
         { 
           link: "generationII",
           title: "Generation II",
-          img: "Pokemon-G2.svg"
+          img: "Pokemon-G2.svg",
         },
         { 
           link: "generationIII",
           title: "Generation III",
-          img: "Pokemon-G3.svg"
+          img: "Pokemon-G3.svg",
         },
         { 
           link: "generationIV",
           title: "Generation IV",
-          img: "Pokemon-G4.svg"
+          img: "Pokemon-G4.svg",
         },
         { 
           link: "generationV",
           title: "Generation V",
-          img: "Pokemon-G5.svg"
+          img: "Pokemon-G5.svg",
         },
         { 
           link: "generationVI",
           title: "Generation VI",
-          img: "Pokemon-G6.svg"
+          img: "Pokemon-G6.svg",
         },
         { 
           link: "generationVII",
           title: "Generation VII",
-          img: "Pokemon-G7.svg"
+          img: "Pokemon-G7.svg",
         },
         { 
           link: "generationVIII",
           title: "Generation VIII",
-          img: "Pokemon-G8.svg"
+          img: "Pokemon-G8.svg",
         }
       ]
     }
-  }
+  },
 }
 </script>
 
