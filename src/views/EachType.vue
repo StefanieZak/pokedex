@@ -1,6 +1,6 @@
 <template>
   <section class="container">
-    <h2>Grass</h2>
+    <h2>{{title}}</h2>
     <div class="card-wrapper" v-if="pokemons">
       <div v-for="(pokemonContents, index) in pokemons" :key="index">
         <CardPokemon :pokemonContents="pokemonContents.pokemon"/>
@@ -14,34 +14,35 @@ import CardPokemon from "@/components/CardPokemon.vue";
 import { api } from "@/services.js";
 
 export default {
-  name: 'Grass',
+  name: 'EachType',
     components: {
     CardPokemon,
   },
   data() {
     return {
       pokemons: "",
+      title: "",
     }
   },
   methods: {
+    titleType() {
+      this.title = this.$route.params.id;
+    },
     getPokemonsByType() {
-      api.get(`type/12`)
+      api.get(`type/${this.$route.params.id}`)
       .then(response => {
         this.pokemons = response.data.pokemon;
       });
     },
   },
   created() {
+    this.titleType();
     this.getPokemonsByType();
   },
 }
 </script>
 
 <style scoped>
-.card {
-  background: var(--bg-grass);
-}
-
 .card-wrapper{
   display: flex;
   flex-wrap: wrap;

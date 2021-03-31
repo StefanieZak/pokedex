@@ -4,7 +4,7 @@
 
     <div class="types-wrapper">
       <div class="btn-types" v-for="(type, index) in types" :key="index">
-        <router-link :to="{name: type}">
+        <router-link :to="{name: 'type', params: {id: type}}">
           <img :src="require(`@/assets/type-${type}.svg`)">
           <p class="type-bug">{{type}}</p>      
         </router-link>

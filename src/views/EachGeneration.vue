@@ -14,7 +14,7 @@ import CardPokemon from "@/components/CardPokemon.vue";
 import { api } from "@/services.js";
 
 export default {
-  name: 'GenerationI',
+  name: 'EachGeneration',
   components: {
     CardPokemon,
   },
