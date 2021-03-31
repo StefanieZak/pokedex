@@ -22,7 +22,7 @@ export default {
 .title {
   display: flex;
   justify-content: center;
-  margin-top: 90px;
+  margin-top: 120px;
 }
 
 .title p {
@@ -57,10 +57,6 @@ export default {
 }
 
 @media screen and (max-width: 420px) {
-.title {
-  margin-top: 50px;
-}
-
 .title p {
   font-size: 5rem;
   -webkit-text-stroke: 2px #222;

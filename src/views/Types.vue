@@ -1,122 +1,46 @@
 <template>
   <section class="container">
     <h2>Types</h2>
-      <div class="types-wrapper">
-        <div class="btn-types">
-          <router-link :to="{name: 'bug'}">
-            <img src="@/assets/type-bug.svg">
-            <p class="type-bug">Bug</p>          
-          </router-link>
-        </div>
-        <div class="btn-types">
-          <router-link :to="{name: 'dark'}">
-            <img src="@/assets/type-dark.svg">
-            <p class="type-dark">Dark</p>          
-          </router-link>
-        </div>
-        <div class="btn-types">
-          <router-link :to="{name: 'dragon'}">
-            <img src="@/assets/type-dragon.svg">
-            <p class="type-dragon">Dragon</p>          
-          </router-link>
-        </div>
-          <div class="btn-types">
-          <router-link :to="{name: 'electric'}">
-            <img src="@/assets/type-electric.svg">
-            <p class="type-electric">Electric</p>          
-          </router-link>
-        </div>
-         <div class="btn-types">
-          <router-link :to="{name: 'fairy'}">
-            <img src="@/assets/type-fairy.svg">
-            <p class="type-fairy">Fairy</p>          
-          </router-link>
-        </div>
-        <div class="btn-types">
-          <router-link :to="{name: 'fighting'}">
-            <img src="@/assets/type-fighting.svg">
-            <p class="type-fighting">Fighting</p>          
-          </router-link>
-        </div>
-        <div class="btn-types">
-          <router-link :to="{name: 'fire'}">
-            <img src="@/assets/type-fire.svg">
-            <p class="type-fire">Fire</p>          
-          </router-link>
-        </div>
-        <div class="btn-types">
-          <router-link :to="{name: 'flying'}">
-            <img src="@/assets/type-flying.svg">
-            <p class="type-flying">Flying</p>          
-          </router-link>
-        </div>
-        <div class="btn-types">
-          <router-link :to="{name: 'ghost'}">
-            <img src="@/assets/type-ghost.svg">
-            <p class="type-ghost">Ghost</p>          
-          </router-link>
-        </div>
-        <div class="btn-types">
-          <router-link :to="{name: 'grass'}">
-            <img src="@/assets/type-grass.svg">
-            <p class="type-grass">Grass</p>          
-          </router-link>
-        </div>
-        <div class="btn-types">
-          <router-link :to="{name: 'ground'}">
-            <img src="@/assets/type-ground.svg">
-            <p class="type-ground">Ground</p>          
-          </router-link>
-        </div>
-        <div class="btn-types">
-          <router-link :to="{name: 'ice'}">
-            <img src="@/assets/type-ice.svg">
-            <p class="type-ice">Ice</p>          
-          </router-link>
-        </div>
-        <div class="btn-types">
-          <router-link :to="{name: 'normal'}">
-            <img src="@/assets/type-normal.svg">
-            <p class="type-normal">Normal</p>          
-          </router-link>
-        </div>
-        <div class="btn-types">
-          <router-link :to="{name: 'poison'}">
-            <img src="@/assets/type-poison.svg">
-            <p class="type-poison">Poison</p>          
-          </router-link>
-        </div>
-        <div class="btn-types">
-          <router-link :to="{name: 'psychic'}">
-            <img src="@/assets/type-psychic.svg">
-            <p class="type-psychic">Psychic</p>          
-          </router-link>
-        </div>
-        <div class="btn-types">
-          <router-link :to="{name: 'rock'}">
-            <img src="@/assets/type-rock.svg">
-            <p class="type-rock">Rock</p>          
-          </router-link>
-        </div>
-        <div class="btn-types">
-          <router-link :to="{name: 'steel'}">
-            <img src="@/assets/type-steel.svg">
-            <p class="type-steel">Steel</p>          
-          </router-link>
-        </div>
-        <div class="btn-types">
-          <router-link :to="{name: 'water'}">
-            <img src="@/assets/type-water.svg">
-            <p class="type-water">Water</p>          
-          </router-link>
-        </div>                                                                                                                      
+
+    <div class="types-wrapper">
+      <div class="btn-types" v-for="(type, index) in types" :key="index">
+        <router-link :to="{name: type}">
+          <img :src="require(`@/assets/type-${type}.svg`)">
+          <p class="type-bug">{{type}}</p>      
+        </router-link>
       </div>
+    </div>
+
   </section>
 </template>
 
 <script>
 export default {
   name: 'Types',
+  data() {
+    return {
+      types: [
+        "bug",
+        "dark",
+        "dragon",
+        "electric",
+        "fairy",
+        "fighting",
+        "fire",
+        "flying",
+        "ghost",
+        "grass",
+        "ground",
+        "ice",
+        "normal",
+        "poison",
+        "psychic",
+        "rock",
+        "steel",
+        "water",
+      ]
+    }
+  }
 }
 </script>
 
