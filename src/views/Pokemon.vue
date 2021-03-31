@@ -1,7 +1,7 @@
 <template>
   <section class="container">
-    <div class="bg-pokemon" :class="bg"></div>
-    <div class="bg-white"></div>
+    <div v-if="!notFound" class="bg-pokemon" :class="bg"></div>
+    <div v-if="!notFound" class="bg-white"></div>
     <div class="wrapper" v-if="dadosPokemon">
     <div class="first-column">
      <nav class="nav-pokemon">
@@ -23,6 +23,11 @@
         <img v-else src="../assets/pokebola.png">
       </div>
     </div>
+
+    <div v-if="notFound" class="not-found">
+      <img src="@/assets/pokebola.png">
+      <p>Sorry!<br>Pokemon not found!<br>Try another name or number.</p>
+    </div>
   </section>
 </template>
 
@@ -36,6 +41,7 @@ export default {
       dadosPokemon: "",
       bg: "",
       bgType: "",
+      notFound: false,
     }
   },
   methods: {
@@ -45,6 +51,8 @@ export default {
         this.dadosPokemon = response.data;
         this.bg = this.dadosPokemon.types[0].type.name;
         this.bgType = "type-" + this.dadosPokemon.types[0].type.name;
+      }).catch(() =>{
+        this.notFound = true;
       });
     },
   },
@@ -160,6 +168,25 @@ export default {
   margin-right: 15px;
   padding: 10px 15px;
   border-radius: 10px;
+}
+
+.not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 120px;
+}
+
+.not-found img {
+  max-width: 5rem;
+}
+
+.not-found p {
+  margin-top: 20px;
+  line-height: 1.5rem;
+  font-weight: bold;
+  color: rgb(207, 0, 0);
+  text-align: center;
 }
 
 @media screen and (max-width: 1410px) {
