@@ -1,7 +1,8 @@
 <template>
   <section class="stats-wrapper">
     <div v-for="(value, index) in stats" :key="index">
-      <h4 v-if="stats">{{value.stat.name}}</h4>
+      <PageLoading v-if="loading"/>
+      <h4 v-else-if="stats">{{value.stat.name}}</h4>
       <div class="progress">
       <p class="progress-done" v-if="stats" :style="{width: value.base_stat/2 + '%', opacity: '1', background: value.base_stat >= 50 ? 'lightgreen' : 'tomato' }">{{value.base_stat}}</p>
       </div>
@@ -16,15 +17,18 @@ export default {
   name: "BaseStats",
   data() {
     return {
+      loading: true,
       stats: [],
     }
   },
   methods: {
     getPokemon(name) {
+      this.loading = true,
       api.get(`pokemon/${name}`)
       .then(response => {
         this.stats = response.data.stats;
       });
+      this.loading = false;
     },
   },
   created() {

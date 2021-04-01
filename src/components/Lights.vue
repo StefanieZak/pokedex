@@ -17,7 +17,7 @@ export default {
         {style: {background: 'linear-gradient(#D9FFCD, #2FD100)'}, class:'forthLight'}
       ]
     }
-  }
+  },
 }
 </script>
 

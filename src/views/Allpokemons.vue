@@ -1,7 +1,8 @@
 <template>
   <section class="container">
     <h2>All Pokemon</h2>
-    <div class="card-wrapper" v-if="pokemons">
+    <PageLoading v-if="loading"/>
+    <div class="card-wrapper" v-else-if="pokemons">
       <div v-for="(pokemonContents, index) in pokemons" :key="index">
           <CardPokemon :pokemonContents="pokemonContents"/>
       </div>
@@ -14,15 +15,18 @@
 import CardPokemon from "@/components/CardPokemon.vue";
 import { api } from "@/services.js";
 import InfiniteLoading from 'vue-infinite-loading';
+import PageLoading from '../components/PageLoading.vue';
 
 export default {
   name: 'Allpokemons',
   components: {
     CardPokemon,
     InfiniteLoading,
+    PageLoading,
   },
   data() {
     return {
+      loading: true,
       pokemons: [],
       limit: 36,
       offset: 36,
@@ -30,9 +34,11 @@ export default {
   },
   methods: {
     getPokemons() {
+      this.loading = true;
       api.get(`pokemon?limit=36&offset=0`)
       .then(response => {
         this.pokemons = response.data.results;
+        this.loading = false;
       });
     },
     infiniteHandler($state) {

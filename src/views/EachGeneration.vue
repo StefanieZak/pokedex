@@ -1,7 +1,8 @@
 <template>
   <section class="container">
     <h2>{{title}}</h2>
-    <div class="card-wrapper" v-if="pokemons">
+    <PageLoading v-if="loading"/>
+    <div class="card-wrapper" v-else-if="pokemons">
       <div v-for="(pokemonContents, index) in pokemons" :key="index">
         <CardPokemon :pokemonContents="pokemonContents"/>
       </div>
@@ -20,6 +21,7 @@ export default {
   },
   data() {
     return {
+      loading: true,
       pokemons: [],
       title: "",
       limit: "",
@@ -75,10 +77,12 @@ export default {
       this.offset = this.generations[this.$route.params.id].offset;
     },
     getPokemons() {
+      this.loading = true;
       api.get(`pokemon?limit=${this.limit}&offset=${this.offset}`)
       .then(response => {
         this.pokemons = response.data.results;
       });
+      this.loading = false;
     }
   },
   created() {

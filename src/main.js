@@ -3,8 +3,11 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import InfiniteLoading from "vue-infinite-loading";
+import PageLoading from "./components/PageLoading";
 
 Vue.config.productionTip = false;
+
+Vue.component("PageLoading", PageLoading);
 
 Vue.filter("pokemonNumber", (valor) => {
   valor = Number(valor);

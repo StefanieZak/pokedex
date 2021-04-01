@@ -1,7 +1,8 @@
 <template>
   <section class="container">
     <h2>{{title}}</h2>
-    <div class="card-wrapper" v-if="pokemons">
+    <PageLoading v-if="loading"/>
+    <div class="card-wrapper" v-else-if="pokemons">
       <div v-for="(pokemonContents, index) in pokemons" :key="index">
         <CardPokemon :pokemonContents="pokemonContents.pokemon"/>
       </div>
@@ -20,6 +21,7 @@ export default {
   },
   data() {
     return {
+      loading: true,
       pokemons: "",
       title: "",
     }
@@ -29,10 +31,12 @@ export default {
       this.title = this.$route.params.id;
     },
     getPokemonsByType() {
+      this.loading = true;
       api.get(`type/${this.$route.params.id}`)
       .then(response => {
         this.pokemons = response.data.pokemon;
       });
+      this.loading = false;
     },
   },
   created() {

@@ -2,7 +2,8 @@
   <section class="container">
     <div v-if="!notFound" class="bg-pokemon" :class="bg"></div>
     <div v-if="!notFound" class="bg-white"></div>
-    <div class="wrapper" v-if="dadosPokemon">
+    <PageLoading v-if="loading"/>
+    <div class="wrapper" v-else-if="dadosPokemon">
     <div class="first-column">
      <nav class="nav-pokemon">
       <router-link :to="{name: 'pokemon'}">About</router-link>
@@ -23,7 +24,6 @@
         <img v-else src="../assets/pokebola.png">
       </div>
     </div>
-
     <div v-if="notFound" class="not-found">
       <img src="@/assets/pokebola.png">
       <p>Sorry!<br>Pokemon not found!<br>Try another name or number.</p>
@@ -38,6 +38,7 @@ export default {
   name: "Pokemon",
   data() {
     return {
+      loading: true,
       dadosPokemon: "",
       bg: "",
       bgType: "",
@@ -46,6 +47,7 @@ export default {
   },
   methods: {
     getPokemon(name) {
+      this.loading = true;
       api.get(`pokemon/${name}`)
       .then(response => {
         this.dadosPokemon = response.data;
@@ -54,6 +56,7 @@ export default {
       }).catch(() =>{
         this.notFound = true;
       });
+        this.loading = false;
     },
   },
   created() {

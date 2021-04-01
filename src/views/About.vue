@@ -1,6 +1,7 @@
 <template>
   <section class="box">
-    <div v-if="dadosPokemon">
+    <PageLoading v-if="loading"/>
+    <div v-else-if="dadosPokemon">
         <div class="info-wrapper" v-if="species">
           <p>Habitat</p>
           <p>{{species.habitat.name}}</p>
@@ -47,6 +48,7 @@ export default {
   name: "About",
     data() {
     return {
+      loading: true,
       dadosPokemon: "",
       description: "",
       species: "",
@@ -56,6 +58,7 @@ export default {
   },
   methods: {
     getPokemon(name) {
+      this.loading = true;
       api.get(`pokemon/${name}`)
       .then(response => {
         this.dadosPokemon = response.data;
@@ -64,6 +67,7 @@ export default {
         this.getDescription(this.dadosPokemon.id);
         this.getSpecies(this.dadosPokemon.id);
       });
+      this.loading = false;
     },
     getDescription(id) {
       api.get(`characteristic/${id}`)
