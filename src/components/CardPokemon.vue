@@ -1,5 +1,5 @@
 <template>
-  <div class="card" :class="routeCard || typeCard" v-if="itemPokemon">
+  <div class="card" :class="cardByRoute || typeCard" v-if="itemPokemon">
     <router-link :to="{name: 'pokemon', params: {id: itemPokemon.name}}">
       <div class="number-wrapper">
         <h3>{{itemPokemon.name}}</h3>
@@ -7,8 +7,8 @@
       </div>
       <div class="img-wrapper">
         <div>
-        <p :class="routeBg || bgType">{{itemPokemon.types[0].type.name}}</p>
-        <p :class="routeBg || bgType" v-if="itemPokemon.types[1]">{{itemPokemon.types[1].type.name}}</p>
+        <p :class="labelByRoute || bgType">{{itemPokemon.types[0].type.name}}</p>
+        <p :class="labelByRoute || bgType" v-if="itemPokemon.types[1]">{{itemPokemon.types[1].type.name}}</p>
         </div>
         <img  v-if="itemPokemon.sprites.other['official-artwork'].front_default" :src="itemPokemon.sprites.other['official-artwork'].front_default" :alt="itemPokemon.name">
         <img v-else src="../assets/pokebola.png">
@@ -28,8 +28,8 @@ export default {
       itemPokemon: "",
       typeCard: "",
       bgType:"",
-      routeCard: this.$route.params.id,
-      routeBg: `type-${this.$route.params.id}`
+      cardByRoute: "",
+      labelByRoute: "",
     }
   },
   methods: {
@@ -40,10 +40,17 @@ export default {
         this.typeCard = this.itemPokemon.types[0].type.name;
         this.bgType = "type-" + this.itemPokemon.types[0].type.name;
       });
+    },
+    getTypeByRoute() {
+      if (this.$route.name === "type") {
+        this.cardByRoute = this.$route.params.id;
+        this.labelByRoute = "type-" + this.$route.params.id;
+      }
     }
   },
   created() {
     this.getPokemon(this.pokemonContents.name); 
+    this.getTypeByRoute();
   }
 }
 </script>
