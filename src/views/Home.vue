@@ -1,27 +1,36 @@
 <template>
 <transition>
   <section class="home-wrapper">
-    <div class="btn-wrapper">
-    <router-link :to="{name: 'allpokemons'}">
-      All Pokemon
-      <img class="all-btn" src="@/assets/all-btn.png">
-    </router-link>
-    </div>
-    <div class="btn-wrapper">
-    <router-link :to="{name: 'generations'}">
-      Generations
-      <img class="generation-btn" src="@/assets/generation-btn.jpg">
-    </router-link>
-    </div>
-    <div class="btn-wrapper">
-    <router-link :to="{name: 'types'}">
-      Types
-      <img class="types-btn" src="@/assets/types-btn.jpg">
-    </router-link>
 
-    <div class="pokemon-guess"></div>
-
+    <div class="btn-wrapper">
+      <router-link :to="{name: 'allpokemons'}">
+        All Pokemon
+        <img class="all-btn" src="@/assets/all-btn.png">
+      </router-link>
     </div>
+
+    <div class="btn-wrapper">
+      <router-link :to="{name: 'generations'}">
+        Generations
+        <img class="generation-btn" src="@/assets/generation-btn.jpg">
+      </router-link>
+    </div>
+
+    <div class="btn-wrapper">
+      <router-link :to="{name: 'types'}">
+        Types
+        <img class="types-btn" src="@/assets/types-btn.jpg">
+      </router-link>
+    </div>
+
+    <div class="btn-wrapper">
+      <router-link :to="{name: 'battle'}">
+        Battle
+        <img class="battle-btn" src="@/assets/battle.png">
+      </router-link>
+    </div>
+
+
   </section>
   </transition>
 </template>
@@ -80,6 +89,12 @@ export default {
   margin-bottom: 50px;
 }
 
+.battle-btn {
+  height: 110%;
+  margin-left: 66%;
+  margin-bottom: 10px;
+}
+
 @media  screen and (max-width: 1400px) { 
   .all-btn {
   margin-left: 40%;
@@ -89,6 +104,9 @@ export default {
   }
   .types-btn {
     margin-left: 54%;
+  }
+  .battle-btn {
+    margin-left: 52%;
   }
 }
 
@@ -102,6 +120,9 @@ export default {
   .types-btn {
     margin-left: 38%;
   }
+  .battle-btn {
+    margin-left: 36%;
+  }
 }
 
 @media  screen and (max-width: 768px) { 
@@ -109,10 +130,14 @@ export default {
   margin-left: 5%;
   }
   .generation-btn {
+    height: 75%;
     margin-left: 8%;
   }
   .types-btn {
     margin-left: 30%;
+  }
+  .battle-btn {
+    margin-left: 28%;
   }
 }
 
@@ -122,7 +147,6 @@ export default {
   padding-left: 15px;
   }
   .generation-btn {
-    height: 75%;
     margin-left: 2%;
   }
 }

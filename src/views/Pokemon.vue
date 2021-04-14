@@ -1,9 +1,11 @@
 <template>
   <section class="container">
-    <div v-if="!notFound" class="bg-pokemon" :class="bg"></div>
-    <div v-if="!notFound" class="bg-white"></div>
     <PageLoading v-if="loading"/>
+
     <div class="wrapper" v-else-if="dadosPokemon">
+    <div class="bg-pokemon" :class="bg"></div>
+    <div class="bg-white"></div>
+    
     <div class="first-column">
      <nav class="nav-pokemon">
       <router-link :to="{name: 'pokemon'}">About</router-link>
@@ -11,6 +13,7 @@
      </nav>
      <router-view></router-view>
     </div>
+
       <div class="second-column">
         <div class="number-wrapper">
         <h3>{{dadosPokemon.name}}</h3>
@@ -24,6 +27,7 @@
         <img v-else src="../assets/pokebola.png">
       </div>
     </div>
+    
     <div v-if="notFound" class="not-found">
       <img src="@/assets/pokebola.png">
       <p>Sorry!<br>Pokemon not found!<br>Try another name or number.</p>
