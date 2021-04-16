@@ -117,6 +117,11 @@ button {
   --font-secondary: Arial, Helvetica, sans-serif;
 }
 
+  @font-face {
+    font-family: "Free Pixel";
+    src: url("./assets/FreePixel.ttf");
+ }
+
 .container {
   display: flex;
   flex-direction: column;
