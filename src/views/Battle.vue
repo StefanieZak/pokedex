@@ -7,8 +7,8 @@
           <button type="submit"><img src="@/assets/lupa.svg" alt="search button"></button>
         </form>
 
-        <select name="select">
-          <option value="attribute" selected>Choose your attribute</option>
+        <select name="select" v-model="selected" @change="getAttribute" :disabled="!this.infoPokemon ? true : false">
+          <option value="attribute" selected disabled>Choose your attribute</option>
           <option value="hp">HP</option>
           <option value="attack">Attack</option>
           <option value="defense">Defense</option>
@@ -39,7 +39,7 @@
         <p>Sorry! Pokemon not found!<br>Try another name.</p>
       </div>
 
-      <button class="btn-battle">Battle</button>
+      <button class="btn-battle disabled">Battle</button>
   </section>
 </template>
 
@@ -57,7 +57,9 @@ export default {
       infoPokemon: "",
       stats: "",
       bgType: "",
-      notFound: false
+      notFound: false,
+      disabled: true,
+      selected: "",
     }
   },
   methods: {
@@ -80,12 +82,21 @@ export default {
         .then(response => {
           this.infoPokemon = response.data;
           this.stats = response.data.stats;
+          console.log(this.stats);
           this.bgType = this.infoPokemon.types[0].type.name;
         });
       }
       else {
         this.notFound = true;
       }
+    },
+    getAttribute() {
+      // if(...includes(this.selected)) {
+      //   return...
+      // }
+      console.log(this.selected);
+      const btn = document.querySelector('.btn-battle');
+      btn.classList.remove('disabled');
     }
   },
   created() {
@@ -111,13 +122,13 @@ form {
   width: 300px;
   font-size: 1rem;
   padding: 8px 10px;
-  background-color: #ddd;
+  background-color: #ffffbb;
   border-radius: 10px;
   color: #222;
 }
 
 .search-pokemon input:focus {
-  background-color: #eee;
+  background-color: #ffff75;
 }
 
 .search-pokemon input::placeholder {
@@ -138,7 +149,7 @@ select {
   font-family: var(--font-secondary);
   font-size: 1rem;
   padding: 0 10px;
-  background-color: #ddd;
+  background-color: #ffffbb;
   border-radius: 10px;
   border: 0;
   border-bottom: 2px solid transparent; 
@@ -150,7 +161,7 @@ select {
 select:focus {
   outline: 0;
   border-bottom-color: #444;
-  background-color: #eee;
+  background-color: #ffff75;
 }
 
 .card {
@@ -271,6 +282,10 @@ select:focus {
 .btn-battle:hover {
   color: #FEFE81;
   background: #B39B00;
+}
+
+.disabled {
+  display: none;
 }
 
 </style>
