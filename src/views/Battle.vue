@@ -7,8 +7,8 @@
           <button type="submit"><img src="@/assets/lupa.svg" alt="search button"></button>
         </form>
 
-        <select name="select" v-model="selected" @change="getAttribute" :disabled="!this.infoPokemon ? true : false">
-          <option value="attribute" selected disabled>Choose your attribute</option>
+        <select name="select" v-model="attributeSelected" @change="getAttributeByIndex" :disabled="!this.infoPokemon ? true : false">
+          <option value="" selected disabled>Choose your attribute</option>
           <option v-for="(value, index) in stats" :key="index" :value="value.stat.name">{{value.stat.name}}</option>
         </select>
       </div>
@@ -54,8 +54,9 @@ export default {
       bgType: "",
       notFound: false,
       disabled: true,
-      selected: "",
+      attributeSelected: "",
       attributes: [],
+      statName: [],
       indexSelected: "",
     }
   },
@@ -83,6 +84,9 @@ export default {
           this.attributes = this.stats.map((item) => {
             return item.base_stat;
         });
+          this.statName = this.stats.map((item) => {
+            return item.stat.name;
+        });
           this.bgType = this.infoPokemon.types[0].type.name;
         });
       }
@@ -91,11 +95,8 @@ export default {
         this.infoPokemon = false;
       }
     },
-    getAttribute() {
-      console.log("this.stats", this.stats);
-      console.log("item selecionado", this.selected.indexOf);
-      console.log("Index", this.stats.indexOf(this.selected));
-
+    getAttributeByIndex() {
+      this.indexSelected = this.statName.indexOf(this.attributeSelected);
 
       const btn = document.querySelector('.btn-battle');
       btn.classList.remove('disabled');
