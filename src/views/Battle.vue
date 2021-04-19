@@ -9,12 +9,7 @@
 
         <select name="select" v-model="selected" @change="getAttribute" :disabled="!this.infoPokemon ? true : false">
           <option value="attribute" selected disabled>Choose your attribute</option>
-          <option value="hp">HP</option>
-          <option value="attack">Attack</option>
-          <option value="defense">Defense</option>
-          <option value="special-attack">Special-Attack</option>
-          <option value="special-defense">Special-Defense</option>
-          <option value="speed">Speed</option>
+          <option v-for="(value, index) in stats" :key="index" :value="value.stat.name">{{value.stat.name}}</option>
         </select>
       </div>
 
@@ -27,7 +22,7 @@
               <p v-if="stats">{{value.stat.name}}</p>
               <p>{{value.base_stat}}</p>
               <div class="progress">
-              <p class="progress-done" v-if="stats" :style="{width: value.base_stat/2 + '%', opacity: '1', background: value.base_stat >= 80 ? '#0FD537' : 'red' }">{{value.base_stat}}</p>
+              <p class="progress-done" v-if="stats" :style="{width: value.base_stat/2 + '%', opacity: '1', background: value.base_stat >= 100 ? '#0FD537' : 'red' }">{{value.base_stat}}</p>
               </div>
             </div>
           </div>
@@ -39,7 +34,7 @@
         <p>Sorry! Pokemon not found!<br>Try another name.</p>
       </div>
 
-      <button class="btn-battle disabled">Battle</button>
+      <button class="btn-battle disabled">Ready</button>
   </section>
 </template>
 
@@ -60,6 +55,8 @@ export default {
       notFound: false,
       disabled: true,
       selected: "",
+      attributes: [],
+      indexSelected: "",
     }
   },
   methods: {
@@ -78,23 +75,28 @@ export default {
     },
     getCardPokemon() {
       if (this.pokemonNameList.includes(this.processedSearch)) {
+        this.notFound = false;
         api.get(`pokemon/${this.processedSearch}`)
         .then(response => {
           this.infoPokemon = response.data;
           this.stats = response.data.stats;
-          console.log(this.stats);
+          this.attributes = this.stats.map((item) => {
+            return item.base_stat;
+        });
           this.bgType = this.infoPokemon.types[0].type.name;
         });
       }
       else {
         this.notFound = true;
+        this.infoPokemon = false;
       }
     },
     getAttribute() {
-      // if(...includes(this.selected)) {
-      //   return...
-      // }
-      console.log(this.selected);
+      console.log("this.stats", this.stats);
+      console.log("item selecionado", this.selected.indexOf);
+      console.log("Index", this.stats.indexOf(this.selected));
+
+
       const btn = document.querySelector('.btn-battle');
       btn.classList.remove('disabled');
     }
@@ -108,7 +110,6 @@ export default {
 <style scoped>
 .form-select {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   margin-bottom: 60px;
 }
@@ -120,6 +121,8 @@ form {
 
 .search-pokemon input {
   width: 300px;
+  font-family: "Free pixel";
+  font-weight: bold;
   font-size: 1rem;
   padding: 8px 10px;
   background-color: #ffffbb;
@@ -132,6 +135,8 @@ form {
 }
 
 .search-pokemon input::placeholder {
+  font-family: "Free pixel";
+  font-weight: bold;
   font-size: 1rem;
   color: #222;
 }
@@ -146,8 +151,10 @@ form {
 
 select {
   width: 280px;
-  font-family: var(--font-secondary);
+  font-family: "Free pixel";
+  font-weight: bold;
   font-size: 1rem;
+  text-transform: capitalize;
   padding: 0 10px;
   background-color: #ffffbb;
   border-radius: 10px;
@@ -167,7 +174,8 @@ select:focus {
 .card {
   width: 350px;
   margin: 0 auto 50px;
-  background: #71a398;
+  background: url("../assets/scenery.png") no-repeat;
+  background-size: cover;
   border: 4px solid #222;
   border-radius: 10px;
   padding: 0 20px 20px 20px;
@@ -192,26 +200,6 @@ select:focus {
 .rock {border: 4px solid var(--bg-rock);}
 .steel {border: 4px solid var(--bg-steel);}
 .water {border: 4px solid var(--bg-water);}
-
-/* background card */
-.bug {background: #53D26E70;}
-.dark {background: #483C5C70;}
-.dragon {background: #63CAD970;}
-.electric {background: #FFD86F70;}
-.fairy {background: #EC267470;}
-.fighting {background: #F0623A70;}
-.fire {background: #FB926C70;}
-.flying {background: #9FB9CB70;}
-.ghost {background: #90679170;}
-.grass {background: #48D0B070;}
-.ground {background: #A9702D70;}
-.ice {background: #95D1EB70;}
-.normal {background: #EAB4C470;}
-.poison {background: #AE88DD70;}
-.psychic {background: #FF73BE70;}
-.rock {background: #7D7D7D70;}
-.steel {background: #4DAD8D70;}
-.water {background: #79BFFE70;}
 
 .card img {
   width: 80%;
@@ -250,6 +238,7 @@ select:focus {
 	align-items: center;
 	justify-content: center;
 	height: 100%;
+  margin-left: -1px;
 }
 
 .not-found img {
@@ -258,15 +247,18 @@ select:focus {
 }
 
 .not-found p {
-  margin: 20px 0 30px;
-  line-height: 1.5rem;
+  font-family: "Free pixel";
   font-weight: bold;
+  line-height: 1.5rem;
+  margin: 20px 0 30px;
   color: rgb(207, 0, 0);
   text-align: center;
 }
 
 .btn-battle {
   width: 130px;
+  font-family: "Free pixel";
+  font-weight: bold;
   font-size: 1rem;
   font-weight: bold;
   text-transform: uppercase;
@@ -286,6 +278,75 @@ select:focus {
 
 .disabled {
   display: none;
+}
+
+@media screen and (max-width: 920px) {
+.form-select {
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+form {
+  margin-right: 0px;
+  margin-bottom: 15px;
+}
+
+.search-pokemon input {
+  width: 260px;
+}
+
+select {
+  width: 200px;
+  padding: 5px 10px;
+}
+
+.card {
+  width: 280px;
+  margin: 0 auto 30px;
+}
+
+.stats-wrapper p {
+  font-size: 12px;
+  margin-right: 8px;
+}
+
+.progress {
+	width: 180px;
+}
+
+.btn-battle {
+  width: 100px;
+  padding: 10px;
+}
+}
+
+@media screen and (max-width: 780px) {
+  .container {
+    padding-left:10px;
+    padding-right:10px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .container {
+    width: 90%;
+    padding-left:0px;
+    padding-right:0px;
+  }
+
+  h2 {
+    margin: 35px 0 35px 0;
+    text-align: center;
+  }
+
+  .card {
+    width: 220px;
+  }
+
+  .stats-wrapper p:first-child {
+    width: 150px;
+  }
 }
 
 </style>
