@@ -1,0 +1,11 @@
+<svg id="scenery" xmlns="http://www.w3.org/2000/svg" width="796" height="396" viewBox="0 0 796 396">
+  <rect id="Retângulo_135" data-name="Retângulo 135" width="796" height="356" fill="#e0e1dc" opacity="0.8"/>
+  <g id="Elipse_16" data-name="Elipse 16" transform="translate(389 156)" fill="#b3ae90" stroke="#c8c8b0" stroke-width="9">
+    <ellipse cx="203.5" cy="60" rx="203.5" ry="60" stroke="none"/>
+    <ellipse cx="203.5" cy="60" rx="199" ry="55.5" fill="none"/>
+  </g>
+  <g id="Elipse_17" data-name="Elipse 17" transform="translate(12 276)" fill="#b3ae90" stroke="#c8c8b0" stroke-width="9">
+    <ellipse cx="203.5" cy="60" rx="203.5" ry="60" stroke="none"/>
+    <ellipse cx="203.5" cy="60" rx="199" ry="55.5" fill="none"/>
+  </g>
+</svg>

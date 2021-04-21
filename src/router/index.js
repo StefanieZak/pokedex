@@ -7,6 +7,7 @@ import EachGeneration from "../views/EachGeneration.vue";
 import Types from "../views/Types.vue";
 import EachType from "../views/EachType.vue";
 import Battle from "../views/Battle.vue";
+import VsComputer from "../views/VsComputer.vue";
 import Pokemon from "../views/Pokemon.vue";
 import About from "../views/About.vue";
 import BaseStats from "../views/BaseStats.vue";
@@ -66,6 +67,11 @@ const routes = [
     path: "/battle",
     name: "battle",
     component: Battle,
+  },
+  {
+    path: "/vs",
+    name: "vscomputer",
+    component: VsComputer,
   },
   {
     path: "*",

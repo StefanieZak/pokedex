@@ -4,7 +4,7 @@
       <div class="form-select">
         <form class="search-pokemon" @submit.prevent="searchBattle">
           <input type="text" id="search-battle" name="search-battle" placeholder="Choose your pokemon" v-model="search">
-          <button type="submit"><img src="@/assets/lupa.svg" alt="search button"></button>
+          <button type="submit"><img src="@/assets/pixel-lupa.svg" alt="search button"></button>
         </form>
 
         <select name="select" v-model="attributeSelected" @change="getAttributeByIndex" :disabled="!this.infoPokemon ? true : false">
@@ -34,7 +34,8 @@
         <p>Sorry! Pokemon not found!<br>Try another name.</p>
       </div>
 
-      <button class="btn-battle disabled">Ready</button>
+        <router-link class="btn-battle disabled" to="/vs">Ready</router-link>
+        
   </section>
 </template>
 
@@ -55,8 +56,8 @@ export default {
       notFound: false,
       disabled: true,
       attributeSelected: "",
-      attributes: [],
-      statName: [],
+      valueAttribute: [],
+      nameAttribute: [],
       indexSelected: "",
     }
   },
@@ -77,17 +78,20 @@ export default {
     getCardPokemon() {
       if (this.pokemonNameList.includes(this.processedSearch)) {
         this.notFound = false;
+        this.$store.commit("getpokemonSelected", this.processedSearch);
         api.get(`pokemon/${this.processedSearch}`)
         .then(response => {
           this.infoPokemon = response.data;
           this.stats = response.data.stats;
-          this.attributes = this.stats.map((item) => {
+          this.valueAttribute = this.stats.map((item) => {
             return item.base_stat;
         });
-          this.statName = this.stats.map((item) => {
+          this.nameAttribute = this.stats.map((item) => {
             return item.stat.name;
         });
           this.bgType = this.infoPokemon.types[0].type.name;
+          this.$store.commit("getNameAttribute", this.nameAttribute);
+          this.$store.commit("getValueAttribute", this.valueAttribute);
         });
       }
       else {
@@ -96,7 +100,8 @@ export default {
       }
     },
     getAttributeByIndex() {
-      this.indexSelected = this.statName.indexOf(this.attributeSelected);
+      this.indexSelected = this.nameAttribute.indexOf(this.attributeSelected);
+      this.$store.commit("getIndexSelected", this.indexSelected);
 
       const btn = document.querySelector('.btn-battle');
       btn.classList.remove('disabled');
@@ -144,8 +149,8 @@ form {
 
 .search-pokemon button {
   position: absolute;
-  top: 4px;
-  right: 10px;
+  top: 6px;
+  right: 15px;
   background: none;
   cursor: pointer;
 }
@@ -263,6 +268,7 @@ select:focus {
   font-size: 1rem;
   font-weight: bold;
   text-transform: uppercase;
+  text-align: center;
   letter-spacing: .1rem;
   color: #B39B00;
   background: #FEFE81;
@@ -298,7 +304,7 @@ form {
 }
 
 select {
-  width: 200px;
+  width: 210px;
   padding: 5px 10px;
 }
 
