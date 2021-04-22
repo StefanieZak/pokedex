@@ -72,6 +72,9 @@ export default {
       });
     },
     searchBattle() {
+      if(!this.search) {
+        return 
+      }
       this.processedSearch = this.search.toLowerCase().replace(/[.,;?!@#$%¨&*()0123456789]/g, "").trim();
       this.getCardPokemon();
     },

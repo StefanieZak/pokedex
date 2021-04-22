@@ -105,10 +105,10 @@ export default {
             return item.base_stat;
         });
         this.computerPokemon.valueAttribute = this.attributes[this.indexSelected];
-        this.compareAttibute();
+        this.compareAttribute();
       })
     },
-    compareAttibute() {
+    compareAttribute() {
       if ( this.valueAttribute > this.computerPokemon.valueAttribute) {
         this.winner =  this.pokemonSelected + " wins!!!"
       }
