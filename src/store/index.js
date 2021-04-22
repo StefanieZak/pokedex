@@ -6,14 +6,19 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     pokemonSelected: "",
+    imgPokemonSelected: "",
     nameAttribute: [],
     valueAttribute: [],
     indexSelected: "",
   },
   mutations: {
     getpokemonSelected(state, payload) {
-      state.namePokemonPlayer = payload;
+      state.pokemonSelected = payload;
       console.log("Nome pokemon jogador", payload);
+    },
+    getImgPokemonSelected(state, payload) {
+      state.imgPokemonSelected = payload;
+      console.log("IMG pokemon jogador", payload);
     },
     getNameAttribute(state, payload) {
       state.nameAttribute = payload;

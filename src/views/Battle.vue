@@ -34,7 +34,7 @@
         <p>Sorry! Pokemon not found!<br>Try another name.</p>
       </div>
 
-        <router-link class="btn-battle disabled" to="/vs">Ready</router-link>
+        <router-link class="btn-battle disabled" to="/battlefield">Ready</router-link>
         
   </section>
 </template>
@@ -92,6 +92,7 @@ export default {
           this.bgType = this.infoPokemon.types[0].type.name;
           this.$store.commit("getNameAttribute", this.nameAttribute);
           this.$store.commit("getValueAttribute", this.valueAttribute);
+          this.$store.commit("getImgPokemonSelected", this.infoPokemon.sprites.back_default);
         });
       }
       else {
