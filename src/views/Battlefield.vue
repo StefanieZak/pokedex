@@ -14,7 +14,7 @@
         </div>
         <div class="base-player-pokemon"></div>
         <div class="winner">
-          <p></p>
+          <p>{{winner}}</p>
         </div>
 
         <div class="computer-pokemon">
@@ -59,6 +59,7 @@ export default {
     return {
       dadosPokemon: "",
       attributes: [],
+      winner: "",
       playerPokemon: {
         nameAttribute: "",
         valueAttribute: ""
@@ -104,7 +105,16 @@ export default {
             return item.base_stat;
         });
         this.computerPokemon.valueAttribute = this.attributes[this.indexSelected];
-      }) 
+        this.compareAttibute();
+      })
+    },
+    compareAttibute() {
+      if ( this.valueAttribute > this.computerPokemon.valueAttribute) {
+        this.winner =  this.pokemonSelected + " wins!!!"
+      }
+      else {
+        this.winner = this.computerPokemon.namePokemon + " wins!!!"
+      }
     }
   },
   created() {
@@ -235,6 +245,16 @@ export default {
   left: 0;
 }
 
+.winner p {
+  font-family: 'Free pixel';
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  color: #355F65;
+  margin-top: 28px;
+}
+
 .btn-try-again {
   display: block;
   width: 130px;
@@ -259,19 +279,6 @@ export default {
 }
 
 @media screen and (max-width: 1300px) {
-.scenery {
-  height: 600px;
-}
-.img-computer-pokemon {
-  top: 10%;
-  right: 9%;
-}
-.base-computer-pokemon {
-  top: 40%;
-}
-}
-
-@media screen and (max-width: 1100px) {
 .scenery {
   height: 750px;
 }
@@ -329,6 +336,10 @@ h2 {
 .base-player-pokemon  {
   width: 280px;
   height: 100px;
+}
+
+.winner p {
+  font-size: 1rem;
 }
 }
 

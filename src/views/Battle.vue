@@ -289,6 +289,16 @@ select:focus {
 }
 
 @media screen and (max-width: 920px) {
+.container {
+  padding-left:10px;
+  padding-right:10px;
+}
+
+h2 {
+  margin: 35px 0 35px 0;
+  text-align: center;
+}
+
 .form-select {
   flex-direction: column;
   align-items: center;
@@ -327,13 +337,6 @@ select {
   width: 100px;
   padding: 10px;
 }
-}
-
-@media screen and (max-width: 780px) {
-  .container {
-    padding-left:10px;
-    padding-right:10px;
-  }
 }
 
 @media screen and (max-width: 500px) {
