@@ -1,6 +1,7 @@
 <template>
   <section class="container">
     <h2>Battle</h2>
+
       <div class="form-select">
         <form class="search-pokemon" @keyup="searchBattle" @submit.prevent="searchBattle" autocomplete="off">
           <input type="text" id="search-battle" name="search-battle" placeholder="Choose your pokemon" v-model="search">
@@ -15,6 +16,8 @@
           <option v-for="(value, index) in stats" :key="index" :value="value.stat.name">{{value.stat.name}}</option>
         </select>
       </div>
+
+    <PageLoading v-if="loading"/>
 
       <div class="card" :class="bgType" v-if="infoPokemon">
         <img v-if="infoPokemon.sprites.front_default" :src="infoPokemon.sprites.front_default" :alt="infoPokemon.name">
@@ -44,9 +47,13 @@
 
 <script>
 import { api } from "@/services.js";
+import PageLoading from '../components/PageLoading.vue';
 
 export default {
   name: "Battle",
+  components: {
+    PageLoading,
+  },
   data() {
     return {
       search: "",
@@ -63,6 +70,7 @@ export default {
       valueAttribute: [],
       nameAttribute: [],
       indexSelected: "",
+      loading: false,
     }
   },
   methods: {
@@ -84,7 +92,6 @@ export default {
         this.sugegestion = this.pokemonNameList.filter((pokemon) => {
           return pokemon.startsWith(this.processedSearch);
         });
-        console.log(this.sugegestion);
       }
       this.getCardPokemon();
     },
@@ -96,6 +103,7 @@ export default {
     },
     getCardPokemon() {
       if (this.pokemonNameList.includes(this.processedSearch)) {
+        this.loading = true;
         this.notFound = false;
         this.$store.commit("getpokemonSelected", this.processedSearch);
         api.get(`pokemon/${this.processedSearch}`)
@@ -112,6 +120,7 @@ export default {
           this.$store.commit("getNameAttribute", this.nameAttribute);
           this.$store.commit("getValueAttribute", this.valueAttribute);
           this.$store.commit("getImgPokemonSelected", this.infoPokemon.sprites.back_default);
+          this.loading = false;
         });
       }
       else {
