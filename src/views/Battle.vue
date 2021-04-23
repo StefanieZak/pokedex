@@ -2,9 +2,12 @@
   <section class="container">
     <h2>Battle</h2>
       <div class="form-select">
-        <form class="search-pokemon" @submit.prevent="searchBattle">
+        <form class="search-pokemon" @keyup="searchBattle" @submit.prevent="searchBattle">
           <input type="text" id="search-battle" name="search-battle" placeholder="Choose your pokemon" v-model="search">
           <button type="submit"><img src="@/assets/pixel-lupa.svg" alt="search button"></button>
+          <div id="sugegestion">
+          <div class="sugegestion" @click="sugegestionSelected" v-for="(item, index) in sugegestion" :key="index">{{item}}</div>
+          </div>
         </form>
 
         <select name="select" v-model="attributeSelected" @change="getAttributeByIndex" :disabled="!this.infoPokemon ? true : false">
@@ -22,7 +25,7 @@
               <p v-if="stats">{{value.stat.name}}</p>
               <p>{{value.base_stat}}</p>
               <div class="progress">
-              <p class="progress-done" v-if="stats" :style="{width: value.base_stat/2 + '%', opacity: '1', background: value.base_stat >= 100 ? '#0FD537' : 'red' }">{{value.base_stat}}</p>
+              <p class="progress-done" v-if="stats" :style="{width: value.base_stat/3 + '%', opacity: '1', background: value.base_stat >= 100 ? '#0FD537' : 'red' }">{{value.base_stat}}</p>
               </div>
             </div>
           </div>
@@ -48,6 +51,7 @@ export default {
     return {
       search: "",
       processedSearch: "",
+      sugegestion: "",
       pokemon: "",
       pokemonNameList: [],
       infoPokemon: "",
@@ -72,11 +76,23 @@ export default {
       });
     },
     searchBattle() {
-      if(!this.search) {
-        return 
-      }
+      if(!this.search) return;
+      this.suggestionStyle = document.querySelector('#sugegestion');
+      this.suggestionStyle.classList.remove('disabled');
       this.processedSearch = this.search.toLowerCase().replace(/[.,;?!@#$%¨&*()0123456789]/g, "").trim();
+      if( this.search.length > 1) {
+        this.sugegestion = this.pokemonNameList.filter((pokemon) => {
+          return pokemon.startsWith(this.processedSearch);
+        });
+        console.log(this.sugegestion);
+      }
       this.getCardPokemon();
+    },
+    sugegestionSelected(event) {
+      this.processedSearch = event.target.textContent;
+      this.search = event.target.textContent;
+      this.getCardPokemon();
+      this.suggestionStyle.classList.add('disabled');
     },
     getCardPokemon() {
       if (this.pokemonNameList.includes(this.processedSearch)) {
@@ -159,8 +175,32 @@ form {
   cursor: pointer;
 }
 
+.sugegestion {
+  width: 300px;
+  font-family: "Free pixel";
+  font-weight: bold;
+  font-size: 1rem;
+  padding: 8px 10px;
+  background-color: #ffff75;
+  color: #222;
+  cursor: pointer;
+}
+
+form div + div {
+  border-top: 1px solid rgb(192, 179, 0);
+}
+
+.sugegestion:nth-of-type(1) {
+  border-radius: 10px 10px 0 0;
+}
+
+.sugegestion:last-child {
+  border-radius: 0 0 10px 10px;
+}
+
 select {
   width: 280px;
+  height: 35px;
   font-family: "Free pixel";
   font-weight: bold;
   font-size: 1rem;
