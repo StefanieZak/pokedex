@@ -109,6 +109,9 @@ export default {
       })
     },
     compareAttribute() {
+      if ( this.valueAttribute == this.computerPokemon.valueAttribute) {
+        this.winner = "draw !!!"
+      }
       if ( this.valueAttribute > this.computerPokemon.valueAttribute) {
         this.winner =  this.pokemonSelected + " wins!!!"
       }
