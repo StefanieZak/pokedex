@@ -2,7 +2,7 @@
   <section class="container">
     <h2>Battle</h2>
       <div class="form-select">
-        <form class="search-pokemon" @keyup="searchBattle" @submit.prevent="searchBattle">
+        <form class="search-pokemon" @keyup="searchBattle" @submit.prevent="searchBattle" autocomplete="off">
           <input type="text" id="search-battle" name="search-battle" placeholder="Choose your pokemon" v-model="search">
           <button type="submit"><img src="@/assets/pixel-lupa.svg" alt="search button"></button>
           <div id="sugegestion">
