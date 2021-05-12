@@ -3,6 +3,14 @@ import { shallowMount, createLocalVue } from '@vue/test-utils'
 import Header from '@/components/Header.vue'
 import VueRouter from 'vue-router'
 
+export default {
+  getPokemon: () => Promise.resolve({ data: 'value' })
+}
+
+jest.mock('axios', () => ({
+  getPokemon: Promise.resolve('value')
+}))
+
 const localVue = createLocalVue()
 localVue.use(VueRouter)
 const router = new VueRouter({
