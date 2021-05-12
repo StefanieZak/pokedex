@@ -8,7 +8,7 @@ localVue.use(VueRouter)
 const router = new VueRouter();
 
 describe('App', () => {
-  it('é uma instância do Vue', () => {
+  it('should be a Vue instance', () => {
     localVue,
     router
     const wrapper = shallowMount(App)
