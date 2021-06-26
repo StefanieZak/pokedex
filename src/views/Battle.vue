@@ -1,53 +1,98 @@
 <template>
-  <section class="container">
+  <section class="container" @click="hideSuggestion($event)">
     <h2>Battle</h2>
 
-      <div class="form-select">
-        <form class="search-pokemon" @keyup="searchBattle" @submit.prevent="searchBattle" autocomplete="off">
-          <input type="text" id="search-battle" name="search-battle" placeholder="Choose your pokemon" v-model="search">
-          <button type="submit"><img src="@/assets/pixel-lupa.svg" alt="search button"></button>
-          <div id="sugegestion">
-          <div class="sugegestion" @click="sugegestionSelected" v-for="(item, index) in sugegestion" :key="index">{{item}}</div>
+    <div class="form-select">
+      <form
+        class="search-pokemon"
+        @input="searchBattle"
+        @submit.prevent="searchBattle"
+        autocomplete="off"
+      >
+        <input
+          type="text"
+          id="search-battle"
+          name="search-battle"
+          placeholder="Choose your pokemon"
+          v-model="search"
+        />
+        <button type="submit">
+          <img src="@/assets/pixel-lupa.svg" alt="search button" />
+        </button>
+        <div id="sugegestion">
+          <div
+            class="sugegestion"
+            @click="sugegestionSelected"
+            v-for="(item, index) in sugegestion"
+            :key="index"
+          >
+            {{ item }}
           </div>
-        </form>
+        </div>
+      </form>
 
-        <select name="select" v-model="attributeSelected" @change="getAttributeByIndex" :disabled="!this.infoPokemon ? true : false">
-          <option value="" selected disabled>Choose your attribute</option>
-          <option v-for="(value, index) in stats" :key="index" :value="value.stat.name">{{value.stat.name}}</option>
-        </select>
-      </div>
+      <select
+        name="select"
+        v-model="attributeSelected"
+        @change="getAttributeByIndex"
+        :disabled="!this.infoPokemon ? true : false"
+      >
+        <option value="" selected disabled>Choose your attribute</option>
+        <option
+          v-for="(value, index) in stats"
+          :key="index"
+          :value="value.stat.name"
+          >{{ value.stat.name }}</option
+        >
+      </select>
+    </div>
 
-    <PageLoading v-if="loading"/>
+    <PageLoading v-if="loading" />
 
-      <div class="card" :class="bgType" v-if="infoPokemon">
-        <img v-if="infoPokemon.sprites.front_default" :src="infoPokemon.sprites.front_default" :alt="infoPokemon.name">
+    <div class="card" :class="bgType" v-if="infoPokemon">
+      <img
+        v-if="infoPokemon.sprites.front_default"
+        :src="infoPokemon.sprites.front_default"
+        :alt="infoPokemon.name"
+      />
 
-         <div class="stats-wrapper">
-          <div v-for="(value, index) in stats" :key="index">
-              <div class="flex">
-              <p v-if="stats">{{value.stat.name}}</p>
-              <p>{{value.base_stat}}</p>
-              <div class="progress">
-              <p class="progress-done" v-if="stats" :style="{width: value.base_stat/3 + '%', opacity: '1', background: value.base_stat >= 100 ? '#0FD537' : 'red' }">{{value.base_stat}}</p>
-              </div>
+      <div class="stats-wrapper">
+        <div v-for="(value, index) in stats" :key="index">
+          <div class="flex">
+            <p v-if="stats">{{ value.stat.name }}</p>
+            <p>{{ value.base_stat }}</p>
+            <div class="progress">
+              <p
+                class="progress-done"
+                v-if="stats"
+                :style="{
+                  width: value.base_stat / 3 + '%',
+                  opacity: '1',
+                  background: value.base_stat >= 100 ? '#0FD537' : 'red',
+                }"
+              >
+                {{ value.base_stat }}
+              </p>
             </div>
           </div>
         </div>
       </div>
+    </div>
 
-      <div class="not-found" v-if="notFound">
-        <img src="@/assets/pokebola.png">
-        <p>Sorry! Pokemon not found!<br>Try another name.</p>
-      </div>
+    <div class="not-found" v-if="notFound">
+      <img src="@/assets/pokebola.png" />
+      <p>Sorry! Pokemon not found!<br />Try another name.</p>
+    </div>
 
-        <router-link class="btn-battle disabled" to="/battlefield">Ready</router-link>
-        
+    <router-link class="btn-battle disabled" to="/battlefield"
+      >Ready</router-link
+    >
   </section>
 </template>
 
 <script>
 import { api } from "@/services.js";
-import PageLoading from '../components/PageLoading.vue';
+import PageLoading from "../components/PageLoading.vue";
 
 export default {
   name: "Battle",
@@ -71,12 +116,11 @@ export default {
       nameAttribute: [],
       indexSelected: "",
       loading: false,
-    }
+    };
   },
   methods: {
     getPokemonByName() {
-      api.get(`pokemon?limit=890&offset=0`)
-      .then(response => {
+      api.get(`pokemon?limit=890&offset=0`).then((response) => {
         this.pokemon = response.data.results;
         this.pokemonNameList = this.pokemon.map((item) => {
           return item.name;
@@ -84,11 +128,14 @@ export default {
       });
     },
     searchBattle() {
-      if(!this.search) return;
-      this.suggestionStyle = document.querySelector('#sugegestion');
-      this.suggestionStyle.classList.remove('disabled');
-      this.processedSearch = this.search.toLowerCase().replace(/[.,;?!@#$%¨&*()0123456789]/g, "").trim();
-      if( this.search.length > 1) {
+      if (!this.search) return;
+      this.suggestionStyle = document.querySelector("#sugegestion");
+      this.suggestionStyle.classList.remove("disabled");
+      this.processedSearch = this.search
+        .toLowerCase()
+        .replace(/[.,;?!@#$%¨&*()0123456789]/g, "")
+        .trim();
+      if (this.search.length > 1) {
         this.sugegestion = this.pokemonNameList.filter((pokemon) => {
           return pokemon.startsWith(this.processedSearch);
         });
@@ -99,32 +146,34 @@ export default {
       this.processedSearch = event.target.textContent;
       this.search = event.target.textContent;
       this.getCardPokemon();
-      this.suggestionStyle.classList.add('disabled');
+      this.searchBattle();
+      this.suggestionStyle.classList.add("disabled");
     },
     getCardPokemon() {
       if (this.pokemonNameList.includes(this.processedSearch)) {
         this.loading = true;
         this.notFound = false;
         this.$store.commit("getpokemonSelected", this.processedSearch);
-        api.get(`pokemon/${this.processedSearch}`)
-        .then(response => {
+        api.get(`pokemon/${this.processedSearch}`).then((response) => {
           this.infoPokemon = response.data;
           this.stats = response.data.stats;
           this.valueAttribute = this.stats.map((item) => {
             return item.base_stat;
-        });
+          });
           this.nameAttribute = this.stats.map((item) => {
             return item.stat.name;
-        });
+          });
           this.bgType = this.infoPokemon.types[0].type.name;
           this.$store.commit("getNameAttribute", this.nameAttribute);
           this.$store.commit("getValueAttribute", this.valueAttribute);
-          this.$store.commit("getImgPokemonSelected", this.infoPokemon.sprites.back_default);
+          this.$store.commit(
+            "getImgPokemonSelected",
+            this.infoPokemon.sprites.versions["generation-v"]["black-white"]
+              .animated.back_default || this.infoPokemon.sprites.back_default
+          );
           this.loading = false;
         });
-      }
-      else {
-        this.notFound = true;
+      } else {
         this.infoPokemon = false;
       }
     },
@@ -132,14 +181,21 @@ export default {
       this.indexSelected = this.nameAttribute.indexOf(this.attributeSelected);
       this.$store.commit("getIndexSelected", this.indexSelected);
 
-      const btn = document.querySelector('.btn-battle');
-      btn.classList.remove('disabled');
-    }
+      const btn = document.querySelector(".btn-battle");
+      btn.classList.remove("disabled");
+    },
+    hideSuggestion(event) {
+      const form = document.getElementsByClassName("search-pokemon");
+      this.suggestionStyle = document.querySelector("#sugegestion");
+      if (event.target != form) {
+        this.suggestionStyle.classList.add("disabled");
+      }
+    },
   },
   created() {
     this.getPokemonByName();
-  }
-}
+  },
+};
 </script>
 
 <style scoped>
@@ -218,7 +274,7 @@ select {
   background-color: #ffffbb;
   border-radius: 10px;
   border: 0;
-  border-bottom: 2px solid transparent; 
+  border-bottom: 2px solid transparent;
   color: #222;
   outline: none;
   cursor: pointer;
@@ -241,24 +297,60 @@ select:focus {
 }
 
 /* background border*/
-.bug {border: 4px solid var(--bg-bug);}
-.dark {border: 4px solid var(--bg-dark);}
-.dragon {border: 4px solid var(--bg-dragon);}
-.electric {border: 4px solid var(--bg-electric);}
-.fairy {border: 4px solid var(--bg-fairy);}
-.fighting {border: 4px solid var(--bg-fighting);}
-.fire {border: 4px solid var(--bg-fire);}
-.flying {border: 4px solid var(--bg-flying);}
-.ghost {border: 4px solid var(--bg-ghost);}
-.grass {border: 4px solid var(--bg-grass);}
-.ground {border: 4px solid var(--bg-ground);}
-.ice {border: 4px solid var(--bg-ice);}
-.normal {border: 4px solid var(--bg-normal);}
-.poison {border: 4px solid var(--bg-poison);}
-.psychic {border: 4px solid var(--bg-psychic);}
-.rock {border: 4px solid var(--bg-rock);}
-.steel {border: 4px solid var(--bg-steel);}
-.water {border: 4px solid var(--bg-water);}
+.bug {
+  border: 4px solid var(--bg-bug);
+}
+.dark {
+  border: 4px solid var(--bg-dark);
+}
+.dragon {
+  border: 4px solid var(--bg-dragon);
+}
+.electric {
+  border: 4px solid var(--bg-electric);
+}
+.fairy {
+  border: 4px solid var(--bg-fairy);
+}
+.fighting {
+  border: 4px solid var(--bg-fighting);
+}
+.fire {
+  border: 4px solid var(--bg-fire);
+}
+.flying {
+  border: 4px solid var(--bg-flying);
+}
+.ghost {
+  border: 4px solid var(--bg-ghost);
+}
+.grass {
+  border: 4px solid var(--bg-grass);
+}
+.ground {
+  border: 4px solid var(--bg-ground);
+}
+.ice {
+  border: 4px solid var(--bg-ice);
+}
+.normal {
+  border: 4px solid var(--bg-normal);
+}
+.poison {
+  border: 4px solid var(--bg-poison);
+}
+.psychic {
+  border: 4px solid var(--bg-psychic);
+}
+.rock {
+  border: 4px solid var(--bg-rock);
+}
+.steel {
+  border: 4px solid var(--bg-steel);
+}
+.water {
+  border: 4px solid var(--bg-water);
+}
 
 .card img {
   width: 80%;
@@ -283,20 +375,20 @@ select:focus {
 }
 
 .progress {
-	background-color: #222;
-	border-radius: 20px;
-	margin: 15px 0;
-	height: 10px;
-	width: 200px;
+  background-color: #222;
+  border-radius: 20px;
+  margin: 15px 0;
+  height: 10px;
+  width: 200px;
 }
 
 .progress-done {
-	border-radius: 20px;
+  border-radius: 20px;
   color: transparent;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
   margin-left: -1px;
 }
 
@@ -322,9 +414,9 @@ select:focus {
   font-weight: bold;
   text-transform: uppercase;
   text-align: center;
-  letter-spacing: .1rem;
-  color: #B39B00;
-  background: #FEFE81;
+  letter-spacing: 0.1rem;
+  color: #b39b00;
+  background: #fefe81;
   border-radius: 10px;
   padding: 15px;
   margin: 0 auto 50px;
@@ -332,8 +424,8 @@ select:focus {
 }
 
 .btn-battle:hover {
-  color: #FEFE81;
-  background: #B39B00;
+  color: #fefe81;
+  background: #b39b00;
 }
 
 .disabled {
@@ -341,61 +433,65 @@ select:focus {
 }
 
 @media screen and (max-width: 920px) {
-.container {
-  padding-left:10px;
-  padding-right:10px;
-}
+  .container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 
-h2 {
-  margin: 35px 0 35px 0;
-  text-align: center;
-}
+  h2 {
+    margin: 35px 0 35px 0;
+    text-align: center;
+  }
 
-.form-select {
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 30px;
-}
+  .form-select {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 30px;
+  }
 
-form {
-  margin-right: 0px;
-  margin-bottom: 15px;
-}
+  form {
+    margin-right: 0px;
+    margin-bottom: 15px;
+  }
 
-.search-pokemon input {
-  width: 260px;
-}
+  .search-pokemon input {
+    width: 260px;
+  }
 
-select {
-  width: 210px;
-  padding: 5px 10px;
-}
+  .sugegestion {
+    width: 260px;
+  }
 
-.card {
-  width: 280px;
-  margin: 0 auto 30px;
-}
+  select {
+    width: 210px;
+    padding: 5px 10px;
+  }
 
-.stats-wrapper p {
-  font-size: 12px;
-  margin-right: 8px;
-}
+  .card {
+    width: 280px;
+    margin: 0 auto 30px;
+  }
 
-.progress {
-	width: 180px;
-}
+  .stats-wrapper p {
+    font-size: 12px;
+    margin-right: 8px;
+  }
 
-.btn-battle {
-  width: 100px;
-  padding: 10px;
-}
+  .progress {
+    width: 180px;
+  }
+
+  .btn-battle {
+    width: 100px;
+    padding: 10px;
+  }
 }
 
 @media screen and (max-width: 500px) {
   .container {
     width: 90%;
-    padding-left:0px;
-    padding-right:0px;
+    padding-left: 0px;
+    padding-right: 0px;
   }
 
   h2 {
@@ -411,5 +507,4 @@ select {
     width: 150px;
   }
 }
-
 </style>

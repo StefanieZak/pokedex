@@ -3,28 +3,39 @@
     <h2>Battle</h2>
     <div>
       <div class="scenery">
-      <!-- <img src="@/assets/scenery.svg" alt="scenery"> -->
+        <!-- <img src="@/assets/scenery.svg" alt="scenery"> -->
 
         <div class="img-computer-pokemon">
-          <img :src="computerPokemon.imgPokemon" :alt="computerPokemon.namePokemon">
+          <img
+            :src="computerPokemon.imgPokemon"
+            :alt="computerPokemon.namePokemon"
+          />
         </div>
         <div class="base-computer-pokemon"></div>
         <div class="img-player-pokemon">
-          <img :src="imgPokemonSelected" :alt="pokemonSelected">
+          <img :src="imgPokemonSelected" :alt="pokemonSelected" />
         </div>
         <div class="base-player-pokemon"></div>
         <div class="winner">
-          <p>{{winner}}</p>
+          <p>{{ winner }}</p>
         </div>
 
         <div class="computer-pokemon">
           <div class="info-computer-pokemon">
-            <h3>{{computerPokemon.namePokemon}}</h3>
+            <h3>{{ computerPokemon.namePokemon }}</h3>
             <div class="attributes">
-              <p>{{nameAttribute}}</p>
-              <p>{{computerPokemon.valueAttribute}}</p>
+              <p>{{ nameAttribute }}</p>
+              <p>{{ computerPokemon.valueAttribute }}</p>
               <div class="progress">
-                <div class="progress-done" :style="{width: computerPokemon.valueAttribute/2 + '%', opacity: '1', background: computerPokemon.valueAttribute >= 100 ? '#0FD537' : 'red' }"></div>
+                <div
+                  class="progress-done"
+                  :style="{
+                    width: computerPokemon.valueAttribute / 2 + '%',
+                    opacity: '1',
+                    background:
+                      computerPokemon.valueAttribute >= 100 ? '#0FD537' : 'red',
+                  }"
+                ></div>
               </div>
             </div>
           </div>
@@ -32,12 +43,20 @@
 
         <div class="player-pokemon">
           <div class="info-player-pokemon">
-            <h3>{{pokemonSelected}}</h3>
+            <h3>{{ pokemonSelected }}</h3>
             <div class="attributes">
-              <p>{{nameAttribute}}</p>
-              <p>{{valueAttribute}}</p>
+              <p>{{ nameAttribute }}</p>
+              <p>{{ valueAttribute }}</p>
               <div class="progress">
-                <div class="progress-done" :style="{width: computerPokemon.valueAttribute/2 + '%', opacity: '1', background: computerPokemon.valueAttribute >= 100 ? '#0FD537' : 'red' }"></div>
+                <div
+                  class="progress-done"
+                  :style="{
+                    width: computerPokemon.valueAttribute / 2 + '%',
+                    opacity: '1',
+                    background:
+                      computerPokemon.valueAttribute >= 100 ? '#0FD537' : 'red',
+                  }"
+                ></div>
               </div>
             </div>
           </div>
@@ -45,7 +64,6 @@
       </div>
 
       <router-link class="btn-try-again" to="/battle">Try Again!</router-link>
-
     </div>
   </section>
 </template>
@@ -62,14 +80,14 @@ export default {
       winner: "",
       playerPokemon: {
         nameAttribute: "",
-        valueAttribute: ""
+        valueAttribute: "",
       },
       computerPokemon: {
         namePokemon: "",
         imgPokemon: "",
-        valueAttribute: ""
-      }
-    }
+        valueAttribute: "",
+      },
+    };
   },
   computed: {
     pokemonSelected() {
@@ -86,7 +104,7 @@ export default {
     },
     indexSelected() {
       return this.$store.state.indexSelected;
-    }
+    },
   },
   methods: {
     getPlayerPokemon() {
@@ -95,52 +113,54 @@ export default {
     },
     getComputerPokemon() {
       const numberPokemon = Math.floor(Math.random() * 889) + 1;
-      api.get(`pokemon/${numberPokemon}`)
-      .then( response => {
+      api.get(`pokemon/${numberPokemon}`).then((response) => {
         this.dadosPokemon = response.data;
         this.computerPokemon.namePokemon = this.dadosPokemon.name;
-        this.computerPokemon.imgPokemon = this.dadosPokemon.sprites.front_default;
+        this.computerPokemon.imgPokemon =
+          this.dadosPokemon.sprites.versions["generation-v"]["black-white"]
+            .animated.front_default || this.dadosPokemon.sprites.front_default;
         this.stats = response.data.stats;
         this.attributes = this.stats.map((item) => {
-            return item.base_stat;
+          return item.base_stat;
         });
-        this.computerPokemon.valueAttribute = this.attributes[this.indexSelected];
+        this.computerPokemon.valueAttribute = this.attributes[
+          this.indexSelected
+        ];
         this.compareAttribute();
-      })
+      });
     },
     compareAttribute() {
-      if ( this.valueAttribute == this.computerPokemon.valueAttribute) {
-        this.winner = "draw !!!"
+      if (this.valueAttribute == this.computerPokemon.valueAttribute) {
+        this.winner = "draw !!!";
       }
-      if ( this.valueAttribute > this.computerPokemon.valueAttribute) {
-        this.winner =  this.pokemonSelected + " wins!!!"
+      if (this.valueAttribute > this.computerPokemon.valueAttribute) {
+        this.winner = this.pokemonSelected + " wins!!!";
+      } else {
+        this.winner = this.computerPokemon.namePokemon + " wins!!!";
       }
-      else {
-        this.winner = this.computerPokemon.namePokemon + " wins!!!"
-      }
-    }
+    },
   },
   created() {
     this.getPlayerPokemon();
     this.getComputerPokemon();
-  }
-}
+  },
+};
 </script>
 
 <style scoped>
-
 .scenery {
   width: 55vw;
-  height: 400px;
+  height: 430px;
   margin: 0 auto;
-  background: #E0E1DC;
+  background: #e0e1dc;
   position: relative;
 }
 
-.info-computer-pokemon, .info-player-pokemon {
+.info-computer-pokemon,
+.info-player-pokemon {
   width: 280px;
-  background: #F4F0D3;
-  border: 4px solid #2F302B;
+  background: #f4f0d3;
+  border: 4px solid #2f302b;
   border-radius: 25px 0 25px 0;
   font-family: "Free pixel";
   text-transform: capitalize;
@@ -163,32 +183,31 @@ export default {
 
 .img-computer-pokemon {
   position: absolute;
-  top: 3%;
-  right: 6%;
+  bottom: 25%;
+  right: 8%;
   z-index: 1;
 }
 
 .img-player-pokemon {
   position: absolute;
-  bottom: -5%;
+  bottom: 0;
   left: 6%;
   z-index: 1;
 }
 
-.img-computer-pokemon img, 
-.img-player-pokemon img { 
-  width: 300px;
+.img-computer-pokemon img,
+.img-player-pokemon img {
+  width: 250px;
 }
 
-.base-computer-pokemon, 
-.base-player-pokemon  {
+.base-computer-pokemon,
+.base-player-pokemon {
   display: block;
   width: 420px;
   height: 140px;
-  background: #B3AE90;
-  border: 9px solid #C8C8B0;
+  background: #b3ae90;
+  border: 9px solid #c8c8b0;
   border-radius: 50%;
-
 }
 
 .base-computer-pokemon {
@@ -203,7 +222,8 @@ export default {
   left: 1%;
 }
 
-.info-computer-pokemon h3, .info-player-pokemon h3 {
+.info-computer-pokemon h3,
+.info-player-pokemon h3 {
   font-size: 1.375rem;
   margin: 8px 0 0 15px;
 }
@@ -220,20 +240,20 @@ export default {
 }
 
 .progress {
-	background-color: #222;
-	border-radius: 20px;
-	margin: 15px 0;
-	height: 8px;
-	width: 100px;
+  background-color: #222;
+  border-radius: 20px;
+  margin: 15px 0;
+  height: 8px;
+  width: 100px;
 }
 
 .progress-done {
-	border-radius: 20px;
+  border-radius: 20px;
   color: transparent;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
   margin-left: -1px;
 }
 
@@ -241,20 +261,20 @@ export default {
   width: 55vw;
   height: 100px;
   margin: 0 auto;
-  background: #9CB9BD;
-  border: 9px solid #FF946C;
+  background: #9cb9bd;
+  border: 9px solid #ff946c;
   position: absolute;
   bottom: -100px;
   left: 0;
 }
 
 .winner p {
-  font-family: 'Free pixel';
+  font-family: "Free pixel";
   font-size: 1.5rem;
   font-weight: bold;
   text-transform: uppercase;
   text-align: center;
-  color: #355F65;
+  color: #355f65;
   margin-top: 28px;
 }
 
@@ -267,9 +287,9 @@ export default {
   font-weight: bold;
   text-transform: uppercase;
   text-align: center;
-  letter-spacing: .1rem;
-  color: #B39B00;
-  background: #FEFE81;
+  letter-spacing: 0.1rem;
+  color: #b39b00;
+  background: #fefe81;
   border-radius: 10px;
   padding: 15px;
   margin: 140px auto 50px;
@@ -277,128 +297,127 @@ export default {
 }
 
 .btn-try-again:hover {
-  color: #FEFE81;
-  background: #B39B00;
+  color: #fefe81;
+  background: #b39b00;
 }
 
 @media screen and (max-width: 1300px) {
-.scenery {
-  height: 750px;
-}
-.info-player-pokemon {
-  bottom: 38%;
-}
-.img-computer-pokemon {
-  top: 15%;
-  right: 10%;
-}
-.img-player-pokemon {
-  bottom: -2%;
-  left: 8%;
-}
-.base-computer-pokemon {
-  top: 35%;
-}
+  .scenery {
+    height: 750px;
+  }
+  .info-player-pokemon {
+    bottom: 38%;
+  }
+  .img-computer-pokemon {
+    bottom: 48%;
+    right: 10%;
+  }
+  .img-player-pokemon {
+    left: 8%;
+  }
+  .base-computer-pokemon {
+    top: 35%;
+  }
 }
 
 @media screen and (max-width: 780px) {
-.container {
-  padding-left:10px;
-  padding-right:10px;
-}
+  .container {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 
-h2 {
-  margin: 35px 0 35px 0;
-  text-align: center;
-}
+  h2 {
+    margin: 35px 0 35px 0;
+    text-align: center;
+  }
 
-.scenery {
-  height: 600px;
-}
+  .scenery {
+    height: 600px;
+  }
 
-.info-player-pokemon {
-  bottom: 38%;
-}
+  .info-player-pokemon {
+    bottom: 38%;
+  }
 
-.img-computer-pokemon {
-  top: 15%;
-  right: 12%;
-}
+  .img-computer-pokemon {
+    bottom: 50%;
+    right: 12%;
+  }
 
-.img-player-pokemon {
-  bottom: 0%;
-  left: 12%;
-}
+  .img-player-pokemon {
+    bottom: 0%;
+    left: 12%;
+  }
 
-.img-computer-pokemon img, 
-.img-player-pokemon img { 
-  width: 200px;
-}
+  .img-computer-pokemon img,
+  .img-player-pokemon img {
+    width: 180px;
+  }
 
-.base-computer-pokemon, 
-.base-player-pokemon  {
-  width: 280px;
-  height: 100px;
-}
+  .base-computer-pokemon,
+  .base-player-pokemon {
+    width: 280px;
+    height: 100px;
+  }
 
-.winner p {
-  font-size: 1rem;
-}
+  .winner p {
+    font-size: 1rem;
+  }
 }
 
 @media screen and (max-width: 550px) {
-.container {
-  width: 90%;
-  padding-left:0px;
-  padding-right:0px;
-}
+  .container {
+    width: 90%;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
 
-.scenery {
-  width: 80vw;
-  height: 480px;
-}
+  .scenery {
+    width: 80vw;
+    height: 480px;
+  }
 
-.info-computer-pokemon, .info-player-pokemon {
-  width: 210px;
-  font-size: 0.75rem;
-  box-shadow: none;
-}
+  .info-computer-pokemon,
+  .info-player-pokemon {
+    width: 210px;
+    font-size: 0.75rem;
+    box-shadow: none;
+  }
 
-.info-player-pokemon {
-  bottom: 35%;
-}
+  .info-player-pokemon {
+    bottom: 35%;
+  }
 
-.info-computer-pokemon h3, .info-player-pokemon h3 {
-  font-size: 1rem;
-}
+  .info-computer-pokemon h3,
+  .info-player-pokemon h3 {
+    font-size: 1rem;
+  }
 
-.progress {
-	width: 60px;
-}
+  .progress {
+    width: 60px;
+  }
 
-.img-computer-pokemon {
-  top: 16%;
-  right: 8%;
-}
+  .img-computer-pokemon {
+    right: 8%;
+  }
 
-.img-player-pokemon {
-  left: 8%;
-}
+  .img-player-pokemon {
+    left: 5%;
+  }
 
-.img-computer-pokemon img, 
-.img-player-pokemon img { 
-  width: 160px;
-}
+  .img-computer-pokemon img,
+  .img-player-pokemon img {
+    width: 140px;
+  }
 
-.base-computer-pokemon, 
-.base-player-pokemon  {
-  width: 200px;
-  height: 80px;
-}
+  .base-computer-pokemon,
+  .base-player-pokemon {
+    width: 200px;
+    height: 80px;
+  }
 
-.winner {
-  width: 80vw;
+  .winner {
+    width: 80vw;
+  }
 }
-}
-
 </style>
