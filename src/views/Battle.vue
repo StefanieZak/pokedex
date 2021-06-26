@@ -19,11 +19,11 @@
         <button type="submit">
           <img src="@/assets/pixel-lupa.svg" alt="search button" />
         </button>
-        <div id="sugegestion">
+        <div id="suggestion">
           <div
-            class="sugegestion"
-            @click="sugegestionSelected"
-            v-for="(item, index) in sugegestion"
+            class="suggestion"
+            @click="suggestionSelected"
+            v-for="(item, index) in suggestion"
             :key="index"
           >
             {{ item }}
@@ -103,7 +103,7 @@ export default {
     return {
       search: "",
       processedSearch: "",
-      sugegestion: "",
+      suggestion: "",
       pokemon: "",
       pokemonNameList: [],
       infoPokemon: "",
@@ -128,21 +128,26 @@ export default {
       });
     },
     searchBattle() {
-      if (!this.search) return;
-      this.suggestionStyle = document.querySelector("#sugegestion");
+      if (!this.search) return (this.notFound = false);
+      this.suggestionStyle = document.querySelector("#suggestion");
       this.suggestionStyle.classList.remove("disabled");
       this.processedSearch = this.search
         .toLowerCase()
         .replace(/[.,;?!@#$%¨&*()0123456789]/g, "")
         .trim();
       if (this.search.length > 1) {
-        this.sugegestion = this.pokemonNameList.filter((pokemon) => {
+        this.suggestion = this.pokemonNameList.filter((pokemon) => {
           return pokemon.startsWith(this.processedSearch);
         });
       }
+      if (this.search.length <= 1 || this.suggestion.length >= 1) {
+        this.notFound = false;
+      } else {
+        this.notFound = true;
+      }
       this.getCardPokemon();
     },
-    sugegestionSelected(event) {
+    suggestionSelected(event) {
       this.processedSearch = event.target.textContent;
       this.search = event.target.textContent;
       this.getCardPokemon();
@@ -152,7 +157,6 @@ export default {
     getCardPokemon() {
       if (this.pokemonNameList.includes(this.processedSearch)) {
         this.loading = true;
-        this.notFound = false;
         this.$store.commit("getpokemonSelected", this.processedSearch);
         api.get(`pokemon/${this.processedSearch}`).then((response) => {
           this.infoPokemon = response.data;
@@ -186,7 +190,7 @@ export default {
     },
     hideSuggestion(event) {
       const form = document.getElementsByClassName("search-pokemon");
-      this.suggestionStyle = document.querySelector("#sugegestion");
+      this.suggestionStyle = document.querySelector("#suggestion");
       if (event.target != form) {
         this.suggestionStyle.classList.add("disabled");
       }
@@ -240,7 +244,7 @@ form {
   cursor: pointer;
 }
 
-.sugegestion {
+.suggestion {
   width: 300px;
   font-family: "Free pixel";
   font-weight: bold;
@@ -255,11 +259,11 @@ form div + div {
   border-top: 1px solid rgb(192, 179, 0);
 }
 
-.sugegestion:nth-of-type(1) {
+.suggestion:nth-of-type(1) {
   border-radius: 10px 10px 0 0;
 }
 
-.sugegestion:last-child {
+.suggestion:last-child {
   border-radius: 0 0 10px 10px;
 }
 
@@ -458,7 +462,7 @@ select:focus {
     width: 260px;
   }
 
-  .sugegestion {
+  .suggestion {
     width: 260px;
   }
 
