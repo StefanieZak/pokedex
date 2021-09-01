@@ -5,13 +5,15 @@
       <div class="which-pokemon">
         <img :src="imgPokemon" :alt="rightPokemon" id="imgPokemon" />
         <h2>Who's that pokémon?</h2>
-        <p
-          v-for="(option, index) in namesPokemon"
-          :key="index"
-          @click="canSelect && check($event)"
-        >
-          {{ option }}
-        </p>
+        <div class="notranslate">
+          <p
+            v-for="(option, index) in namesPokemon"
+            :key="index"
+            @click="canSelect && check($event)"
+          >
+            {{ option }}
+          </p>
+        </div>
       </div>
     </div>
   </div>
@@ -26,6 +28,7 @@ export default {
     return {
       namesPokemon: [],
       rightPokemon: "",
+      newPokemon: "",
       imgPokemon: "",
       canSelect: true,
     };
@@ -41,7 +44,17 @@ export default {
       const promise3 = api.get(`pokemon/${this.randomNumber()}`);
 
       Promise.all([promise1, promise2, promise3]).then((response) => {
-        this.namesPokemon = response.map((item) => item.data.name).sort();
+        this.pokemon = response.map((item) => item.data.name);
+        this.namesPokemon = [...new Set(this.pokemon)].sort();
+        console.log(this.namesPokemon);
+        if (this.namesPokemon.length < 3) {
+          api.get(`pokemon/${this.randomNumber()}`).then((response) => {
+            this.newPokemon = [response.data.name];
+            this.namesPokemon = this.namesPokemon
+              .concat(this.newPokemon)
+              .sort();
+          });
+        }
         this.rightPokemon = response[0].data.name;
         this.imgPokemon =
           response[0].data.sprites.other["official-artwork"].front_default;
@@ -90,23 +103,24 @@ export default {
   width: 900px;
   height: 500px;
   position: relative;
+  border-radius: 5px;
 }
 
 .which-pokemon {
   position: absolute;
-  bottom: 70px;
+  bottom: 50px;
   left: 0;
 }
 
 .which-pokemon img {
-  width: 40%;
+  width: 50%;
   margin: 0 auto;
   filter: brightness(0%);
   transition: 1s;
 }
 
 .which-pokemon h2 {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-default);
   font-size: 1.125rem;
   font-weight: bold;
   margin: 20px 0 20px 125px;
@@ -114,7 +128,7 @@ export default {
 
 .which-pokemon p {
   width: 300px;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-default);
   font-size: 1.125rem;
   font-weight: bold;
   text-align: center;
@@ -164,6 +178,14 @@ export default {
   .which-pokemon_bg {
     background-image: url("../assets/which-pokemon-mobile.png");
     width: 300px;
+  }
+
+  .which-pokemon {
+    bottom: 30px;
+  }
+
+  .which-pokemon img {
+    width: 60%;
   }
 
   .which-pokemon h2 {
