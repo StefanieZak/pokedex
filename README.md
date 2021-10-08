@@ -1,13 +1,17 @@
-# pokedex
+# Pokedex <img src="./src/assets/pokebola.png" width="30" height="30">
 
-Nesse projeto utilizo as tecnologias: Vue.js, JavaScipt, CSS e HTML.
-Faço uso da API: pokeapi.
+Projeto criado para estudo de Vue.js e requisições<br>
+Além do Vue utilizo as tecnologias: JavaScipt, CSS e HTML.<br>
+O consumo da API é feito através da: pokeapi.<br>
+Protótipo criado no AdobeXD <br>
 
 https://pokedexvuejs.netlify.app/
 
-<img src="./src/assets/pokedex.png" width="200">
-<img src="./src/assets/pokedex2.png" width="200">
-<img src="./src/assets/pokedex3.png" width="200">
+<div display="flex">
+  <img src="./src/assets/pokedex.png" width="300" height="250">
+  <img src="./src/assets/pokedex2.png" width="300" height="250">
+  <img src="./src/assets/pokedex3.png" width="300" height="250">
+</div>
 
 ## Project setup
 
