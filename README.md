@@ -8,9 +8,9 @@ Protótipo criado no AdobeXD <br>
 https://pokedexvuejs.netlify.app/
 
 <div display="flex">
-  <img src="./src/assets/pokedex.png" width="300" height="250">
-  <img src="./src/assets/pokedex2.png" width="300" height="250">
-  <img src="./src/assets/pokedex3.png" width="300" height="250">
+  <img src="./src/assets/pokedex.png" width="400" height="300">
+  <img src="./src/assets/pokedex2.png" width="400" height="300">
+  <img src="./src/assets/pokedex3.png" width="400" height="300">
 </div>
 
 ## Project setup
